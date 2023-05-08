@@ -2,17 +2,13 @@ const { model, Schema, Types: { ObjectId } } = require('mongoose');
 
 
 const itemSchema = new Schema({
-    make: { type: String },
-    model: { type: String },
-    year: {
+    category: { type: String },
+    type: { type: String },
+    emissions: {
         type: Number,
-        min: [1950, 'Year must be between 1950 and 2050'],
-        max: [2050, 'Year must be between 1950 and 2050'],
+        min: [0, 'Year must be between a positive number'],
     },
-    description: { type: String },
-    price: { type: Number, min: [0.01, 'Price must be a positive number'] },
-    img: { type: String },
-    material: { type: String },
+    title: { type: String },
     _ownerId: { type: ObjectId, ref: 'User' }
 });
 

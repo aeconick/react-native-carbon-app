@@ -11,13 +11,10 @@ async function getAll(query) {
 
 async function create(item) {
     const result = new Item({
-        make: item.make,
-        model: item.model,
-        year: item.year,
-        description: item.description,
-        price: item.price,
-        img: item.img,
-        material: item.material,
+        category: item.category,
+        type: item.type,
+        emissions: item.emissions,
+        title: item.title,
         _ownerId: item._ownerId
     });
 
@@ -31,13 +28,10 @@ async function getById(id) {
 }
 
 async function updateById(existing, item) {
-    existing.make = item.make;
-    existing.model = item.model;
-    existing.year = item.year;
-    existing.description = item.description;
-    existing.price = item.price;
-    existing.img = item.img;
-    existing.material = item.material;
+    existing.category = item.category;
+    existing.type = item.type;
+    existing.emissions = item.emissions;
+    existing.title = item.title;
 
     await existing.save();
 

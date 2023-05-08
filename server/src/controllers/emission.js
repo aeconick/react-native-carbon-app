@@ -2,7 +2,7 @@ const router = require('express').Router();
 
 const { isAuth, isOwner } = require('../middlewares/guards');
 const preload = require('../middlewares/preload');
-const api = require('../services/furniture');
+const api = require('../services/emission');
 const errorMapper = require('../util/errorMapper');
 
 
@@ -16,13 +16,10 @@ router.get('/', async (req, res) => {
 
 router.post('/', isAuth(), async (req, res) => {
     const item = {
-        make: req.body.make,
-        model: req.body.model,
-        year: req.body.year,
-        description: req.body.description,
-        price: req.body.price,
-        img: req.body.img,
-        material: req.body.material,
+        category: req.body.category,
+        type: req.body.type,
+        emissions: req.body.emissions,
+        title: req.body.title,
         _ownerId: req.user._id
     };
 
