@@ -1,12 +1,13 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 
-import CurrentPollution from "./src/components/CurrentPollution";
+import Budget from "./src/components/Budget";
+import AddEmission from "./src/components/AddEmission";
 
 const App = () => {
   return (
     <View styles={styles.container}>
-      <CurrentPollution />
+      <AddEmission />
     </View>
   );
 }
