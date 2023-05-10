@@ -16,7 +16,6 @@ const AddEmission = () => {
     );
     return (
         <SafeAreaView style={styles.container}>
-            <Text style={styles.title}>Add</Text>
             <FlatList
                 data={categories}
                 renderItem={renderItem}
@@ -38,12 +37,6 @@ const styles = StyleSheet.create({
        marginLeft: 16,
        marginBottom: 20,
     },
-    title: {
-        fontSize: 30,
-        marginTop: 5,
-        fontWeight: "bold",
-        textAlign: "center",
-     }
 });
 
 export default AddEmission;
