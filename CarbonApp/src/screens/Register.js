@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, SafeAreaView, Keyboard, ScrollView, Alert, AsyncStorage } from 'react-native';
+import axios from 'axios';
 
 import Button from '../components/Button';
 import Loader from '../components/Loader';
@@ -40,15 +41,16 @@ const Register = ({ navigation }) => {
 
     const register = () => {
         setLoading(true);
-        setTimeout(() => {
-            try {
-                setLoading(false);
-                AsyncStorage.setItem('userData', JSON.stringify(inputs));
-                navigation.navigate('LoginScreen');
-            } catch (error) {
-                Alert.alert('Error', 'Something went wrong');
-            }
-        }, 3000);
+        axios.post('http://192.168.1.100:3030/users/register', inputs)
+          .then(function (response) {
+            console.log(response.data);
+            //     AsyncStorage.setItem('user', JSON.stringify(response.data));
+                 setLoading(false);
+                 navigation.navigate('Login');
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
     };
 
     const handleOnchange = (text, input) => {
@@ -89,7 +91,7 @@ const Register = ({ navigation }) => {
                     />
                     <Button title="Register" onPress={validate} />
                     <Text
-                        onPress={() => navigation.navigate('LoginScreen')}
+                        onPress={() => navigation.navigate('Login')}
                         style={{
                             color: "black",
                             fontWeight: 'bold',
