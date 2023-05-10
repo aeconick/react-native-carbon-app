@@ -1,11 +1,11 @@
 import React from "react";
 import { View, Text, SafeAreaView, StyleSheet } from "react-native";
 
-const CurrentPollution = () => {
+const Home = () => {
   return (
     <SafeAreaView style={styles.wrapper}>
       <View style={styles.container}>
-        <Text>Current air pollution</Text>
+        <Text>Slay</Text>
         <Text>10</Text>
         <Text>
           Air quality: <Text style={styles.quality}>Good</Text>
@@ -26,4 +26,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default CurrentPollution;
+export default Home;
