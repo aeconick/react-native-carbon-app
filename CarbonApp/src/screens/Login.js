@@ -49,7 +49,9 @@ const Login = ({ navigation }) => {
             .then(function (response) {
                 userData = response.data;
 
-                AsyncStorage.setItem('userData', JSON.stringify(userData),);
+                AsyncStorage.setItem('userData', JSON.stringify(userData))
+                    .then(() => console.log('async storage updated from login'))
+                    .catch((e) => console.log(e));
 
                 navigation.navigate('Main');
                 setLoading(false);
