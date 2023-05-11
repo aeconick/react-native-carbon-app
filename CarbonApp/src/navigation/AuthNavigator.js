@@ -9,10 +9,21 @@ const Stack = createStackNavigator();
 
 const AuthNavigator = () => {
     return (
-        <Stack.Navigator screenOptions={{ headerTintColor: "black", headerBackTitleVisible: false }} initialRouteName='Login'>
+        <Stack.Navigator
+            screenOptions={{
+                headerTintColor: "black",
+                headerBackTitleVisible: true
+            }}
+            initialRouteName='Login'
+        >
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="Register" component={Register} />
-            <Stack.Screen name="Main" component={TabNavigator} options={{ headerShown: false }} />
+            <Stack.Screen name="Main" component={TabNavigator} 
+            options={{
+                headerShown: false,
+                gestureEnabled: false,
+            }
+            } />
         </Stack.Navigator>
     );
 };
