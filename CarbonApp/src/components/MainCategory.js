@@ -1,26 +1,34 @@
 import React from "react";
-import { View, StyleSheet, Text, } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { FontAwesome5, MaterialIcons } from '@expo/vector-icons';
-
-//utensils, plane, video, credit-card, tshirt, apple-alt, plug, tools
+import { useNavigation } from '@react-navigation/native';
 
 import icons from '../constants/icons';
 
 const MainCategory = ({
     title,
 }) => {
+    const navigation = useNavigation();
+
+    const onCategorySelect = () => {
+        console.log('try');
+        navigation.navigate('AddSub');
+    }
+
     return (
-        <View style={styles.container}>
-            <View>
-                <FontAwesome5 name={icons[title]} size={30} color="seagreen" />
+        <TouchableOpacity onPress={onCategorySelect}>
+            <View style={styles.container}>
+                <View>
+                    <FontAwesome5 name={icons[title]} size={30} color="seagreen" />
+                </View>
+                <View>
+                    <Text style={styles.title}>{title}</Text>
+                </View>
+                <View>
+                    <MaterialIcons name="keyboard-arrow-right" size={30} color="seagreen" />
+                </View>
             </View>
-            <View>
-                <Text style={styles.title}>{title}</Text>
-            </View>
-            <View>
-                <MaterialIcons name="keyboard-arrow-right" size={30} color="seagreen" />
-            </View>
-        </View>
+        </TouchableOpacity>
     )
 };
 
