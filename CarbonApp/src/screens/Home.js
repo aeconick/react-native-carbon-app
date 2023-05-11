@@ -1,29 +1,14 @@
-import React from "react";
-import { View, Text, SafeAreaView, StyleSheet } from "react-native";
+import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
 
 const Home = () => {
   return (
-    <SafeAreaView style={styles.wrapper}>
-      <View style={styles.container}>
-        <Text>Slay</Text>
-        <Text>10</Text>
-        <Text>
-          Air quality: <Text style={styles.quality}>Good</Text>
-        </Text>
-      </View>
-    </SafeAreaView>
-  )
+    <View>
+      <Text>Home</Text>
+    </View>
+  );
 };
 
-const styles = StyleSheet.create({
-  wrapper: {
-  },
-  container: {
-    alignItems: "center",
-  },
-  quality: {
-    color: 'green',
-  }
-})
-
 export default Home;
+
+const styles = StyleSheet.create({});
