@@ -1,13 +1,11 @@
 import React from "react";
 import { SafeAreaView, StyleSheet, Text, FlatList, StatusBar } from "react-native";
-import { FontAwesome5 } from '@expo/vector-icons';
 
-//utensils, plane, video, credit-card, tshirt, apple-alt, plug, tools
 
 import categories from '../constants/categories';
 import MainCategory from "../components/MainCategory";
 
-const AddEmission = () => {
+const Add = () => {
     const renderItem = ({ item }) =>
     (
         <MainCategory
@@ -39,4 +37,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default AddEmission;
+export default Add;
