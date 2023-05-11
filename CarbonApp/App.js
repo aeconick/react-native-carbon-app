@@ -7,27 +7,32 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import AuthNavigator from './src/navigation/AuthNavigator';
 import TabNavigator from './src/navigation/TabNavigator';
 
-const Stack = createNativeStackNavigator();
-
 const App = () => {
   let isAuthenticated = false;
+  let userData = null;
+
   const readData = async () => {
     try {
-      const value = await AsyncStorage.getItem(STORAGE_KEY);
+      const value = await AsyncStorage.getItem("userData");
 
-      if (value !== null) {
+      userData = JSON.parse(value);
+      if (userData.email) {
         isAuthenticated = true;
       }
+
     } catch (e) {
       alert('Failed to fetch the input from storage');
     }
   };
-  console.log(isAuthenticated);
+
+  readData()
+    .then(() => console.log(isAuthenticated))
+    .catch((e) => console.log(e))
+  //TODO: fix
   return (
     <NavigationContainer>
-      {isAuthenticated
-        ? <TabNavigator />
-        : <AuthNavigator />}
+      {!isAuthenticated && <AuthNavigator />}
+      {isAuthenticated && <TabNavigator />}
     </NavigationContainer>
   );
 };
