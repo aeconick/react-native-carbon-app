@@ -4,19 +4,23 @@ import { Entypo, Ionicons } from '@expo/vector-icons';
 
 import Home from "../screens/Home";
 import Budget from "../screens/Budget";
-import Add from "../screens/Add";
+import AddNavigator from "./AddNavigation";
 import Diary from "../screens/Diary";
 import Act from "../screens/Act";
+import LogoutIcon from "../components/LogoutIcon";
+
 
 const Tab = createBottomTabNavigator();
 
-const TabNavigator = () => {
+const TabNavigator = ({ navigation }) => {
     return (
         <Tab.Navigator
             screenOptions={{
                 tabBarActiveTintColor: 'seagreen',
                 tabBarInactiveTintColor: 'grey',
-            }}>
+                headerRight: () => <LogoutIcon />
+            }}
+        >
 
             <Tab.Screen
                 name={'Home'}
@@ -47,9 +51,11 @@ const TabNavigator = () => {
             />
 
             <Tab.Screen
-                name={'Add'}
-                component={Add}
+                name={'AddNavigator'}
+                component={AddNavigator}
                 options={{
+                    tabBarLabel: 'Add',
+                    headerShown: false,
                     tabBarIcon: ({ focused }) => (
                         <Ionicons
                             name="add-circle-sharp"
