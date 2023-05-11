@@ -1,14 +1,16 @@
 import React from "react";
-import { } from "react-native";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Entypo, Ionicons } from '@expo/vector-icons';
 
-import AddEmission from "../screens/AddEmission";
 import Home from "../screens/Home";
+import Budget from "../screens/Budget";
+import Add from "../screens/Add";
+import Diary from "../screens/Diary";
+import Act from "../screens/Act";
 
 const Tab = createBottomTabNavigator();
 
-const Tabs = () => {
+const TabNavigator = () => {
     return (
         <Tab.Navigator
             screenOptions={{
@@ -32,7 +34,7 @@ const Tabs = () => {
 
             <Tab.Screen
                 name={'Budget'}
-                component={Home}
+                component={Budget}
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <Ionicons
@@ -46,7 +48,7 @@ const Tabs = () => {
 
             <Tab.Screen
                 name={'Add'}
-                component={AddEmission}
+                component={Add}
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <Ionicons
@@ -60,7 +62,7 @@ const Tabs = () => {
 
             <Tab.Screen
                 name={'Diary'}
-                component={Home}
+                component={Diary}
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <Entypo
@@ -74,7 +76,7 @@ const Tabs = () => {
 
             <Tab.Screen
                 name={'Act'}
-                component={Home}
+                component={Act}
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <Ionicons
@@ -90,4 +92,4 @@ const Tabs = () => {
     );
 };
 
-export default Tabs;
+export default TabNavigator;
