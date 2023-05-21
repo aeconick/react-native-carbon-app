@@ -4,12 +4,14 @@ import { SafeAreaView, StyleSheet, Text, FlatList, StatusBar, View } from "react
 import SubCategory from "../components/SubCategory";
 
 const AddSubEmission = ({route}) => {
-    types = route.params.selectedItem.types;
+    const types = route.params.selectedItem.types;
+    const selectedItem = route.params.selectedItem;
 
     const renderItem = ({ item }) =>
     (
         <SubCategory
             title={item.type}
+            item={selectedItem}
         />
     );
 
