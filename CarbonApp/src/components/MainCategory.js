@@ -7,12 +7,14 @@ import icons from '../constants/icons';
 
 const MainCategory = ({
     title,
+    item,
 }) => {
     const navigation = useNavigation();
 
     const onCategorySelect = () => {
-        console.log('try');
-        navigation.navigate('AddSub');
+        navigation.navigate('AddSub',{
+            selectedItem: item,
+        });
     }
 
     return (

@@ -1,24 +1,24 @@
 import React from "react";
-import { SafeAreaView, StyleSheet, Text, FlatList, StatusBar } from "react-native";
+import { SafeAreaView, StyleSheet, Text, FlatList, StatusBar, View } from "react-native";
 
-import categories from '../constants/categories';
-import MainCategory from "../components/MainCategory";
+import SubCategory from "../components/SubCategory";
 
-const Add = () => {
+const AddSubEmission = ({route}) => {
+    types = route.params.selectedItem.types;
+
     const renderItem = ({ item }) =>
     (
-        <MainCategory
-            title={item.category}
-            item={item}
+        <SubCategory
+            title={item.type}
         />
     );
 
     return (
         <SafeAreaView style={styles.container}>
             <FlatList
-                data={categories}
+                data={types}
                 renderItem={renderItem}
-                keyExtractor={item => item.category}
+                keyExtractor={item => item.type}
                 ListHeaderComponent={<Text style={styles.header}>Select a category</Text>}
             />
         </SafeAreaView>
@@ -38,4 +38,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Add;
+export default AddSubEmission;
