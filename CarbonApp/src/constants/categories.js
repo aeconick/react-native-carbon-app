@@ -68,51 +68,51 @@ const categories = [
 
             {
                 type: 'Train',
-                emissions: 0.000042,
+                emissions: 0.042,
                 unit: 'Distance',
                 text: 'kilometer(s)',
                 min: 2,
-                max: 10000,
+                max: 1000,
             },
             {
                 type: 'Car',
-                emissions: 0.000257,
+                emissions: 0.257,
                 unit: 'Distance',
                 text: 'kilometer(s)',
                 min: 2,
-                max: 10000,
+                max: 1000,
             },
             {
                 type: 'Bus',
-                emissions: 0.000103,
+                emissions: 0.103,
                 unit: 'Distance',
                 text: 'kilometer(s)',
                 min: 2,
-                max: 10000,
+                max: 1000,
             },
             {
                 type: 'Plane',
-                emissions: 0.000288,
+                emissions: 0.1,
                 unit: 'Duration',
-                text: 'hour(s) and placeholder minutes(s)',
+                text: 'kilometer(s)',
                 min: 20,
                 max: 1000,
             },
             {
                 type: 'Boat',
-                emissions: 0.000803,
+                emissions: 0.803,
                 unit: 'Distance',
                 text: 'kilometer(s)',
                 min: 2,
-                max: 10000,
+                max: 1000,
             },
             {
                 type: 'Motorbike',
-                emissions: 0.000108,
+                emissions: 0.108,
                 unit: 'Distance',
                 text: 'kilometer(s)',
                 min: 2,
-                max: 10000,
+                max: 1000,
             },
         ]
     }, {
@@ -124,9 +124,9 @@ const categories = [
 
             {
                 type: 'Audio - Mp3',
-                emissions: (3.8 * Math.pow(10, 6) * 8) / 154,
+                emissions: 0.000526,
                 unit: 'Duration',
-                text: 'hour(s) and placeholder minutes(s)',
+                text: 'minutes(s)',
                 min: 15,
                 max: 600,
             },
@@ -140,25 +140,25 @@ const categories = [
 
             {
                 type: 'Video - Hd',
-                emissions: (1.21 * Math.pow(10, 9) * 8) / ((2 * 60 + 22) * 60),
+                emissions: 0.000763,
                 unit: 'Duration',
-                text: 'hour(s) and placeholder minutes(s)',
+                text: 'minutes(s)',
                 min: 15,
                 max: 600,
             },
             {
                 type: 'Video - FullHd/1080p',
-                emissions: (7.02 * Math.pow(10, 9) * 8) / ((2 * 60 + 22) * 60),
+                emissions: 0.002143,
                 unit: 'Duration',
-                text: 'hour(s) and placeholder minutes(s)',
+                text: 'minutes(s)',
                 min: 15,
                 max: 600,
             },
             {
                 type: 'Video - UltraHd/4K',
-                emissions: (35.73 * Math.pow(10, 9) * 8) / ((2 * 60 + 22) * 60),
+                emissions: 0.008964,
                 unit: 'Duration',
-                text: 'hour(s) and placeholder minutes(s)',
+                text: 'minutes(s)',
                 min: 15,
                 max: 600,
             },
@@ -327,7 +327,7 @@ const categories = [
 
             {
                 type: 'Red Meat',
-                emissions: (39.2 + 27.0) / 2,
+                emissions: (39.2 + 27.0) / 2000,
                 unit: 'Quantity',
                 text: 'g',
                 min: 20,
@@ -335,7 +335,7 @@ const categories = [
             }, // (lamb + beef) / 2
             {
                 type: 'White Meat',
-                emissions: (12.1 + 10.9 + 6.9) / 3,
+                emissions: (12.1 + 10.9 + 6.9) / 3000,
                 unit: 'Quantity',
                 text: 'g',
                 min: 20,
@@ -343,7 +343,7 @@ const categories = [
             }, // (pork + turkey + chicken) / 3
             {
                 type: 'Fish',
-                emissions: 6.1,
+                emissions: 0.0061,
                 unit: 'Quantity',
                 text: 'g',
                 min: 20,
@@ -351,7 +351,7 @@ const categories = [
             },
             {
                 type: 'Lamb',
-                emissions: 39.2,
+                emissions: 0.0392,
                 unit: 'Quantity',
                 text: 'g',
                 min: 20,
@@ -359,7 +359,7 @@ const categories = [
             },
             {
                 type: 'Beef',
-                emissions: 27.0,
+                emissions: 0.027,
                 unit: 'Quantity',
                 text: 'g',
                 min: 20,
@@ -367,7 +367,7 @@ const categories = [
             },
             {
                 type: 'Cheese',
-                emissions: 13.5,
+                emissions: 0.0135,
                 unit: 'Quantity',
                 text: 'g',
                 min: 20,
@@ -375,7 +375,7 @@ const categories = [
             },
             {
                 type: 'Pork',
-                emissions: 12.1,
+                emissions: 0.0121,
                 unit: 'Quantity',
                 text: 'g',
                 min: 20,
@@ -383,7 +383,7 @@ const categories = [
             },
             {
                 type: 'Turkey',
-                emissions: 10.9,
+                emissions: 0.0109,
                 unit: 'Quantity',
                 text: 'g',
                 min: 20,
@@ -391,7 +391,7 @@ const categories = [
             },
             {
                 type: 'Chicken',
-                emissions: 6.9,
+                emissions: 0.0069,
                 unit: 'Quantity',
                 text: 'g',
                 min: 20,
@@ -399,7 +399,7 @@ const categories = [
             },
             {
                 type: 'Tuna',
-                emissions: 6.1,
+                emissions: 0.0061,
                 unit: 'Quantity',
                 text: 'g',
                 min: 20,
@@ -407,7 +407,7 @@ const categories = [
             },
             {
                 type: 'Eggs',
-                emissions: 4.8,
+                emissions: 0.0048,
                 unit: 'Quantity',
                 text: 'g',
                 min: 20,
@@ -415,7 +415,7 @@ const categories = [
             },
             {
                 type: 'Potatoes',
-                emissions: 2.9,
+                emissions: 0.0029,
                 unit: 'Quantity',
                 text: 'g',
                 min: 20,
@@ -423,7 +423,7 @@ const categories = [
             },
             {
                 type: 'Rice',
-                emissions: 2.7,
+                emissions: 0.0027,
                 unit: 'Quantity',
                 text: 'g',
                 min: 20,
@@ -431,7 +431,7 @@ const categories = [
             },
             {
                 type: 'Nuts',
-                emissions: 2.3,
+                emissions: 0.0023,
                 unit: 'Quantity',
                 text: 'g',
                 min: 20,
@@ -439,7 +439,7 @@ const categories = [
             },
             {
                 type: 'Beans',
-                emissions: 2.0,
+                emissions: 0.002,
                 unit: 'Quantity',
                 text: 'g',
                 min: 20,
@@ -447,7 +447,7 @@ const categories = [
             },
             {
                 type: 'Tofu',
-                emissions: 2.0,
+                emissions: 0.002,
                 unit: 'Quantity',
                 text: 'g',
                 min: 20,
@@ -455,7 +455,7 @@ const categories = [
             },
             {
                 type: 'Vegetables',
-                emissions: 2.0,
+                emissions: 0.002,
                 unit: 'Quantity',
                 text: 'g',
                 min: 20,
@@ -463,7 +463,7 @@ const categories = [
             },
             {
                 type: 'Milk',
-                emissions: 1.9,
+                emissions: 0.0019,
                 unit: 'Quantity',
                 text: 'g',
                 min: 20,
@@ -471,7 +471,7 @@ const categories = [
             },
             {
                 type: 'Fruit',
-                emissions: 1.1,
+                emissions: 0.0011,
                 unit: 'Quantity',
                 text: 'g',
                 min: 20,
@@ -479,7 +479,7 @@ const categories = [
             },
             {
                 type: 'Lentils',
-                emissions: 0.9,
+                emissions: 0.0009,
                 unit: 'Quantity',
                 text: 'g',
                 min: 20,
@@ -490,7 +490,7 @@ const categories = [
 
             {
                 type: 'Coffee',
-                emissions: 3.14,
+                emissions: 0.00314,
                 unit: 'Quantity',
                 text: 'g',
                 min: 20,
@@ -498,7 +498,7 @@ const categories = [
             },
             {
                 type: 'Chocolate',
-                emissions: 4.87,
+                emissions: 0.00487,
                 unit: 'Quantity',
                 text: 'g',
                 min: 20,
@@ -515,7 +515,7 @@ const categories = [
 
             {
                 type: 'Europe',
-                emissions: (0.276 / 3.6) * Math.pow(10, -6),
+                emissions: 0.276,
                 unit: 'Consumption',
                 text: 'kWh',
                 min: 1,
@@ -523,7 +523,7 @@ const categories = [
             }, // - 0.276 [kgCO₂eq/kWh]
             {
                 type: 'USA',
-                emissions: (0.493 / 3.6) * Math.pow(10, -6),
+                emissions: 0.493,
                 unit: 'Consumption',
                 text: 'kWh',
                 min: 1,
@@ -531,7 +531,7 @@ const categories = [
             }, // - 0.493 [kgCO₂eq/kWh]
             {
                 type: 'China',
-                emissions: (0.681 / 3.6) * Math.pow(10, -6),
+                emissions: 0.681,
                 unit: 'Consumption',
                 text: 'kWh',
                 min: 1,
@@ -539,12 +539,12 @@ const categories = [
             }, // - 0.681 [kgCO₂eq/kWh]
             {
                 type: 'World',
-                emissions: (0.681 / 3.6) * Math.pow(10, -6),
+                emissions: 0.519,
                 unit: 'Consumption',
                 text: 'kWh',
                 min: 1,
                 max: 1000,
-            }, // - 0.681 [kgCO₂eq/kWh]   
+            }, // - 0.519 [kgCO₂eq/kWh]   
         ]
     },
     {
