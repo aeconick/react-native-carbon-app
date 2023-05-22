@@ -10,9 +10,6 @@ const SubCategory = ({
     const navigation = useNavigation();
 
     const onCategorySelect = () => {
-        console.log('sub category: ', item);
-        console.log('sub category title: ', title);
-
         const finalItem = {
             category: item.category,
             info: item.types.find(el=>el.type==title)
