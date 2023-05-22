@@ -13,7 +13,7 @@ const categories = [
                 emissions: (7.19 * 600) / 2000,
                 unit: 'Quantity',
                 text: 'meals(s)',
-                mix: 1,
+                min: 1,
                 max: 10,
             },
             {
@@ -21,7 +21,7 @@ const categories = [
                 emissions: (5.63 * 600) / 2000,
                 unit: 'Quantity',
                 text: 'meals(s)',
-                mix: 1,
+                min: 1,
                 max: 10,
             },
             {
@@ -29,7 +29,7 @@ const categories = [
                 emissions: (4.67 * 600) / 2000,
                 unit: 'Quantity',
                 text: 'meals(s)',
-                mix: 1,
+                min: 1,
                 max: 10,
             },
             {
@@ -37,7 +37,7 @@ const categories = [
                 emissions: (3.91 * 600) / 2000,
                 unit: 'Quantity',
                 text: 'meals(s)',
-                mix: 1,
+                min: 1,
                 max: 10,
             },
             {
@@ -45,7 +45,7 @@ const categories = [
                 emissions: (3.81 * 600) / 2000,
                 unit: 'Quantity',
                 text: 'meals(s)',
-                mix: 1,
+                min: 1,
                 max: 10,
             },
             {
@@ -53,7 +53,7 @@ const categories = [
                 emissions: (2.89 * 600) / 2000,
                 unit: 'Quantity',
                 text: 'meals(s)',
-                mix: 1,
+                min: 1,
                 max: 10,
             },
 
@@ -71,7 +71,7 @@ const categories = [
                 emissions: 0.000042,
                 unit: 'Distance',
                 text: 'kilometer(s)',
-                mix: 2,
+                min: 2,
                 max: 10000,
             },
             {
@@ -79,7 +79,7 @@ const categories = [
                 emissions: 0.000257,
                 unit: 'Distance',
                 text: 'kilometer(s)',
-                mix: 2,
+                min: 2,
                 max: 10000,
             },
             {
@@ -87,7 +87,7 @@ const categories = [
                 emissions: 0.000103,
                 unit: 'Distance',
                 text: 'kilometer(s)',
-                mix: 2,
+                min: 2,
                 max: 10000,
             },
             {
@@ -95,7 +95,7 @@ const categories = [
                 emissions: 0.000288,
                 unit: 'Duration',
                 text: 'hour(s) and placeholder minutes(s)',
-                mix: 20,
+                min: 20,
                 max: 1000,
             },
             {
@@ -103,7 +103,7 @@ const categories = [
                 emissions: 0.000803,
                 unit: 'Distance',
                 text: 'kilometer(s)',
-                mix: 2,
+                min: 2,
                 max: 10000,
             },
             {
@@ -111,7 +111,7 @@ const categories = [
                 emissions: 0.000108,
                 unit: 'Distance',
                 text: 'kilometer(s)',
-                mix: 2,
+                min: 2,
                 max: 10000,
             },
         ]
@@ -127,7 +127,7 @@ const categories = [
                 emissions: (3.8 * Math.pow(10, 6) * 8) / 154,
                 unit: 'Duration',
                 text: 'hour(s) and placeholder minutes(s)',
-                mix: 15,
+                min: 15,
                 max: 600,
             },
 
@@ -143,7 +143,7 @@ const categories = [
                 emissions: (1.21 * Math.pow(10, 9) * 8) / ((2 * 60 + 22) * 60),
                 unit: 'Duration',
                 text: 'hour(s) and placeholder minutes(s)',
-                mix: 15,
+                min: 15,
                 max: 600,
             },
             {
@@ -151,7 +151,7 @@ const categories = [
                 emissions: (7.02 * Math.pow(10, 9) * 8) / ((2 * 60 + 22) * 60),
                 unit: 'Duration',
                 text: 'hour(s) and placeholder minutes(s)',
-                mix: 15,
+                min: 15,
                 max: 600,
             },
             {
@@ -159,7 +159,7 @@ const categories = [
                 emissions: (35.73 * Math.pow(10, 9) * 8) / ((2 * 60 + 22) * 60),
                 unit: 'Duration',
                 text: 'hour(s) and placeholder minutes(s)',
-                mix: 15,
+                min: 15,
                 max: 600,
             },
         ]
@@ -174,7 +174,7 @@ const categories = [
                 emissions: 80,
                 unit: 'Quantity',
                 text: 'item(s)',
-                mix: 1,
+                min: 1,
                 max: 10,
             },
             {
@@ -182,7 +182,7 @@ const categories = [
                 emissions: 210,
                 unit: 'Quantity',
                 text: 'item(s)',
-                mix: 1,
+                min: 1,
                 max: 10,
             },
             {
@@ -190,7 +190,7 @@ const categories = [
                 emissions: 87,
                 unit: 'Quantity',
                 text: 'item(s)',
-                mix: 1,
+                min: 1,
                 max: 10,
             },
             {
@@ -198,7 +198,7 @@ const categories = [
                 emissions: 588,
                 unit: 'Quantity',
                 text: 'item(s)',
-                mix: 1,
+                min: 1,
                 max: 10,
             },
             {
@@ -206,7 +206,7 @@ const categories = [
                 emissions: 500,
                 unit: 'Quantity',
                 text: 'item(s)',
-                mix: 1,
+                min: 1,
                 max: 10,
             },
             {
@@ -214,7 +214,7 @@ const categories = [
                 emissions: 8800,
                 unit: 'Quantity',
                 text: 'item(s)',
-                mix: 1,
+                min: 1,
                 max: 10,
             },
             {
@@ -222,7 +222,7 @@ const categories = [
                 emissions: 5600,
                 unit: 'Quantity',
                 text: 'item(s)',
-                mix: 1,
+                min: 1,
                 max: 10,
             },
             {
@@ -230,7 +230,7 @@ const categories = [
                 emissions: 6500,
                 unit: 'Quantity',
                 text: 'item(s)',
-                mix: 1,
+                min: 1,
                 max: 10,
             },
             {
@@ -238,7 +238,7 @@ const categories = [
                 emissions: 20,
                 unit: 'Quantity',
                 text: 'item(s)',
-                mix: 1,
+                min: 1,
                 max: 10,
             },
             {
@@ -246,7 +246,7 @@ const categories = [
                 emissions: 211,
                 unit: 'Quantity',
                 text: 'item(s)',
-                mix: 1,
+                min: 1,
                 max: 10,
             },
         ]
@@ -265,7 +265,7 @@ const categories = [
                 emissions: (89 + 39 + 25) / 3,
                 unit: 'Quantity',
                 text: 'item(s)',
-                mix: 1,
+                min: 1,
                 max: 10,
             },
             {
@@ -273,7 +273,7 @@ const categories = [
                 emissions: (56 + 56 + 51) / 3,
                 unit: 'Quantity',
                 text: 'item(s)',
-                mix: 1,
+                min: 1,
                 max: 10,
             },
             {
@@ -281,7 +281,7 @@ const categories = [
                 emissions: 25,
                 unit: 'Quantity',
                 text: 'item(s)',
-                mix: 1,
+                min: 1,
                 max: 10,
             },
             {
@@ -289,7 +289,7 @@ const categories = [
                 emissions: (13 + 12) / 2,
                 unit: 'Quantity',
                 text: 'item(s)',
-                mix: 1,
+                min: 1,
                 max: 10,
             },
             {
@@ -297,7 +297,7 @@ const categories = [
                 emissions: (15 + 19 + 20) / 3,
                 unit: 'Quantity',
                 text: 'item(s)',
-                mix: 1,
+                min: 1,
                 max: 10,
             },
             {
@@ -305,7 +305,7 @@ const categories = [
                 emissions: (28 + 26 + 31 + 56 + 12) / 5,
                 unit: 'Quantity',
                 text: 'item(s)',
-                mix: 1,
+                min: 1,
                 max: 10,
             },
             {
@@ -313,7 +313,7 @@ const categories = [
                 emissions: (7 + 10 + 6) / 3,
                 unit: 'Quantity',
                 text: 'item(s)',
-                mix: 1,
+                min: 1,
                 max: 10,
             },
         ]
@@ -330,7 +330,7 @@ const categories = [
                 emissions: (39.2 + 27.0) / 2,
                 unit: 'Quantity',
                 text: 'g',
-                mix: 20,
+                min: 20,
                 max: 500,
             }, // (lamb + beef) / 2
             {
@@ -338,7 +338,7 @@ const categories = [
                 emissions: (12.1 + 10.9 + 6.9) / 3,
                 unit: 'Quantity',
                 text: 'g',
-                mix: 20,
+                min: 20,
                 max: 500,
             }, // (pork + turkey + chicken) / 3
             {
@@ -346,7 +346,7 @@ const categories = [
                 emissions: 6.1,
                 unit: 'Quantity',
                 text: 'g',
-                mix: 20,
+                min: 20,
                 max: 500,
             },
             {
@@ -354,7 +354,7 @@ const categories = [
                 emissions: 39.2,
                 unit: 'Quantity',
                 text: 'g',
-                mix: 20,
+                min: 20,
                 max: 500,
             },
             {
@@ -362,7 +362,7 @@ const categories = [
                 emissions: 27.0,
                 unit: 'Quantity',
                 text: 'g',
-                mix: 20,
+                min: 20,
                 max: 500,
             },
             {
@@ -370,7 +370,7 @@ const categories = [
                 emissions: 13.5,
                 unit: 'Quantity',
                 text: 'g',
-                mix: 20,
+                min: 20,
                 max: 500,
             },
             {
@@ -378,7 +378,7 @@ const categories = [
                 emissions: 12.1,
                 unit: 'Quantity',
                 text: 'g',
-                mix: 20,
+                min: 20,
                 max: 500,
             },
             {
@@ -386,7 +386,7 @@ const categories = [
                 emissions: 10.9,
                 unit: 'Quantity',
                 text: 'g',
-                mix: 20,
+                min: 20,
                 max: 500,
             },
             {
@@ -394,7 +394,7 @@ const categories = [
                 emissions: 6.9,
                 unit: 'Quantity',
                 text: 'g',
-                mix: 20,
+                min: 20,
                 max: 500,
             },
             {
@@ -402,7 +402,7 @@ const categories = [
                 emissions: 6.1,
                 unit: 'Quantity',
                 text: 'g',
-                mix: 20,
+                min: 20,
                 max: 500,
             },
             {
@@ -410,7 +410,7 @@ const categories = [
                 emissions: 4.8,
                 unit: 'Quantity',
                 text: 'g',
-                mix: 20,
+                min: 20,
                 max: 500,
             },
             {
@@ -418,7 +418,7 @@ const categories = [
                 emissions: 2.9,
                 unit: 'Quantity',
                 text: 'g',
-                mix: 20,
+                min: 20,
                 max: 500,
             },
             {
@@ -426,7 +426,7 @@ const categories = [
                 emissions: 2.7,
                 unit: 'Quantity',
                 text: 'g',
-                mix: 20,
+                min: 20,
                 max: 500,
             },
             {
@@ -434,7 +434,7 @@ const categories = [
                 emissions: 2.3,
                 unit: 'Quantity',
                 text: 'g',
-                mix: 20,
+                min: 20,
                 max: 500,
             },
             {
@@ -442,7 +442,7 @@ const categories = [
                 emissions: 2.0,
                 unit: 'Quantity',
                 text: 'g',
-                mix: 20,
+                min: 20,
                 max: 500,
             },
             {
@@ -450,7 +450,7 @@ const categories = [
                 emissions: 2.0,
                 unit: 'Quantity',
                 text: 'g',
-                mix: 20,
+                min: 20,
                 max: 500,
             },
             {
@@ -458,7 +458,7 @@ const categories = [
                 emissions: 2.0,
                 unit: 'Quantity',
                 text: 'g',
-                mix: 20,
+                min: 20,
                 max: 500,
             },
             {
@@ -466,7 +466,7 @@ const categories = [
                 emissions: 1.9,
                 unit: 'Quantity',
                 text: 'g',
-                mix: 20,
+                min: 20,
                 max: 500,
             },
             {
@@ -474,7 +474,7 @@ const categories = [
                 emissions: 1.1,
                 unit: 'Quantity',
                 text: 'g',
-                mix: 20,
+                min: 20,
                 max: 500,
             },
             {
@@ -482,7 +482,7 @@ const categories = [
                 emissions: 0.9,
                 unit: 'Quantity',
                 text: 'g',
-                mix: 20,
+                min: 20,
                 max: 500,
             },
 
@@ -493,7 +493,7 @@ const categories = [
                 emissions: 3.14,
                 unit: 'Quantity',
                 text: 'g',
-                mix: 20,
+                min: 20,
                 max: 500,
             },
             {
@@ -501,7 +501,7 @@ const categories = [
                 emissions: 4.87,
                 unit: 'Quantity',
                 text: 'g',
-                mix: 20,
+                min: 20,
                 max: 500,
             },
         ]
@@ -518,7 +518,7 @@ const categories = [
                 emissions: (0.276 / 3.6) * Math.pow(10, -6),
                 unit: 'Consumption',
                 text: 'kWh',
-                mix: 1,
+                min: 1,
                 max: 1000,
             }, // - 0.276 [kgCO₂eq/kWh]
             {
@@ -526,7 +526,7 @@ const categories = [
                 emissions: (0.493 / 3.6) * Math.pow(10, -6),
                 unit: 'Consumption',
                 text: 'kWh',
-                mix: 1,
+                min: 1,
                 max: 1000,
             }, // - 0.493 [kgCO₂eq/kWh]
             {
@@ -534,7 +534,7 @@ const categories = [
                 emissions: (0.681 / 3.6) * Math.pow(10, -6),
                 unit: 'Consumption',
                 text: 'kWh',
-                mix: 1,
+                min: 1,
                 max: 1000,
             }, // - 0.681 [kgCO₂eq/kWh]
             {
@@ -542,7 +542,7 @@ const categories = [
                 emissions: (0.681 / 3.6) * Math.pow(10, -6),
                 unit: 'Consumption',
                 text: 'kWh',
-                mix: 1,
+                min: 1,
                 max: 1000,
             }, // - 0.681 [kgCO₂eq/kWh]   
         ]
@@ -557,7 +557,7 @@ const categories = [
                 emissions: 1,
                 unit: 'Quantity',
                 text: 'kgCO2eq',
-                mix: 1,
+                min: 1,
                 max: 1000,
             },
         ]
