@@ -9,7 +9,8 @@ const itemSchema = new Schema({
         min: [0, 'Year must be between a positive number'],
     },
     title: { type: String },
-    _ownerId: { type: ObjectId, ref: 'User' }
+    created: { type: Date },
+    _ownerId: { type: ObjectId, ref: 'User' },
 });
 
 const Item = model('Item', itemSchema);

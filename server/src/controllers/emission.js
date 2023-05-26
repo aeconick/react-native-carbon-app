@@ -20,6 +20,7 @@ router.post('/', isAuth(), async (req, res) => {
         type: req.body.type,
         emissions: req.body.emissions,
         title: req.body.title,
+        created: req.body.created,
         _ownerId: req.user._id
     };
 

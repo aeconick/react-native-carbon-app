@@ -15,9 +15,11 @@ async function create(item) {
         type: item.type,
         emissions: item.emissions,
         title: item.title,
+        created: item.created,
         _ownerId: item._ownerId
     });
 
+    
     await result.save();
 
     return result;
@@ -32,6 +34,7 @@ async function updateById(existing, item) {
     existing.type = item.type;
     existing.emissions = item.emissions;
     existing.title = item.title;
+    existing.created = item.created;
 
     await existing.save();
 
