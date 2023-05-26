@@ -21,7 +21,7 @@ const App = () => {
       }
 
     } catch (e) {
-      alert('Failed to fetch the input from storage');
+      console.log(e);
     }
   };
 
@@ -31,8 +31,8 @@ const App = () => {
   //TODO: fix
   return (
     <NavigationContainer>
-      {!isAuthenticated && <AuthNavigator />}
-      {isAuthenticated && <TabNavigator />}
+      {isAuthenticated && <AuthNavigator />}
+      {!isAuthenticated && <TabNavigator />}
     </NavigationContainer>
   );
 };
