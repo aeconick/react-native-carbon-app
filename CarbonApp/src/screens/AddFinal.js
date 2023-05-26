@@ -1,6 +1,8 @@
 import { View, Text, SafeAreaView, Keyboard, ScrollView } from 'react-native';
 import React from 'react';
 import Slider from '@react-native-community/slider';
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Button from '../components/Button';
 import Loader from '../components/Loader';
@@ -16,7 +18,7 @@ const AddFinal = ({
   const [loading, setLoading] = React.useState(false);
 
   const item = route.params.selectedItem;
-  console.log(item);
+  //console.log(item);
 
   const [range, setRange] = React.useState(item.info.min);
   const [emissions, setEmissions] = React.useState((item.info.min * item.info.emissions).toFixed(2));
@@ -28,9 +30,6 @@ const AddFinal = ({
     if (!inputs.name) {
       handleError('Please input name', 'name');
       isValid = false;
-    } else if (inputs.password.length < 2) {
-      handleError('Min name length of 2', 'name');
-      isValid = false;
     }
 
     if (isValid) {
@@ -40,10 +39,38 @@ const AddFinal = ({
 
   const add = () => {
     setLoading(true);
-    axios.post('http://192.168.1.100:3030/data/catalog', inputs)
+
+    let token = '';
+    const getUserData = async () => {
+      try {
+        const value = await AsyncStorage.getItem("userData");
+  
+        let userData = JSON.parse(value);
+        token = userData.accessToken;
+  
+      } catch (e) {
+        alert('Failed to fetch the input from storage');
+      }
+    };
+    getUserData();
+
+    const config = {
+      headers: {
+        'x-authorization': userData.accessToken,
+      }
+    };
+
+    let logForm = {
+      category: item.category,
+      type: item.info.type,
+      emissions,
+      title: inputs.name,
+      created: new Date(),
+    };
+
+    axios.post('http://192.168.1.100:3030/data/catalog', logForm, config)
       .then(function (response) {
         console.log(response.data);
-        //     AsyncStorage.setItem('user', JSON.stringify(response.data));
         setLoading(false);
         //navigation.navigate('Login');
       })
@@ -61,7 +88,7 @@ const AddFinal = ({
 
   const onSliderChange = (value) => {
     setRange(parseInt(value));
-    setEmissions((parseInt(value)*item.info.emissions).toFixed(2));
+    setEmissions((parseInt(value) * item.info.emissions).toFixed(2));
   };
 
   return (
@@ -82,7 +109,7 @@ const AddFinal = ({
           {range} {item.info.text}
         </Text>
 
-        <View style={{marginTop:10,marginBottom:10}}>
+        <View style={{ marginTop: 10, marginBottom: 10 }}>
           <Slider
             style={{}}
             minimumValue={item.info.min}
