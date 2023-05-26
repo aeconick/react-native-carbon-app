@@ -47,8 +47,8 @@ const AccordionItem = ({ title, bodyText }) => {
                 </View>
             </TouchableOpacity>
             {showContent && (
-                <View styles={styles.body}>
-                    <Text>{bodyText}</Text>
+                <View styles={styles.bodyContainer}>
+                    <Text style={styles.body}>{bodyText}</Text>
                 </View>
             )}
         </View>
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
         padding: '2%',
         borderRadius: 12,
         backgroundColor: 'white',
-        marginBottom: '2%',
+        marginBottom: '2.5%',
         overflow: 'hidden',
     },
     titleContainer: {
@@ -72,12 +72,16 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     title: {
-        fontSize: 16,
+        fontSize: 22,
         color: 'black',
-        fontWeight: 'bold',
+        //fontWeight: 'bold',
     },
-    body: {
+    bodyContainer: {
         paddingHorizontal: '2%',
         paddingVertical: '3%',
+    },
+    body: {
+        fontSize: 18,
+        margin: 8,
     }
 });

@@ -1,4 +1,4 @@
-import { StyleSheet, FlatList, View, SafeAreaView,Text } from 'react-native';
+import { StyleSheet, FlatList, View, SafeAreaView, Text, ScrollView } from 'react-native';
 import React from 'react';
 
 import tips from '../constants/tips';
@@ -7,9 +7,9 @@ import AccordionItem from '../components/AccordionItem';
 const Act = () => {
     return (
         <SafeAreaView>
-            <Text style={{  fontSize: 26, fontWeight: 'bold',margin: 12 }}>
-                    Sustainable Guide:
-                </Text>
+            <Text style={{ fontSize: 26, fontWeight: 'bold', margin: 12 }}>
+                Sustainable Guide:
+            </Text>
             <View style={styles.container}>
                 <FlatList
                     data={tips}
