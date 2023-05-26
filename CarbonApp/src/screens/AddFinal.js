@@ -9,7 +9,8 @@ import Loader from '../components/Loader';
 import Input from '../components/Input';
 
 const AddFinal = ({
-  route
+  route,
+  navigation
 }) => {
   const [inputs, setInputs] = React.useState({
     name: '',
@@ -72,7 +73,7 @@ const AddFinal = ({
       .then(function (response) {
         console.log(response.data);
         setLoading(false);
-        //navigation.navigate('Login');
+        navigation.navigate('Budget');
       })
       .catch(function (error) {
         console.log(error);
