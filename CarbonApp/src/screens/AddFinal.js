@@ -57,7 +57,7 @@ const AddFinal = ({
 
     const config = {
       headers: {
-        'x-authorization': token,
+        'x-authorization': token || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5lbGlfcGNAbWFpbC5iZyIsIl9pZCI6IjY0NTkyYjUxMGExZjExOGZhM2Y4M2M3MiIsImlhdCI6MTY4NTQzODEwNH0.tDB2BUoZyC90A9UWTsM8Lq9F0o-Rv3C_5_Ap3y2N1OA', //TODO
       }
     };
 
