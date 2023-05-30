@@ -57,7 +57,7 @@ const AddFinal = ({
 
     const config = {
       headers: {
-        'x-authorization': userData.accessToken,
+        'x-authorization': token,
       }
     };
 
