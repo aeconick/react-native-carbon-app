@@ -1,5 +1,5 @@
 import { View, Text, SafeAreaView, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
-import React, { useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FontAwesome5, AntDesign, FontAwesome } from '@expo/vector-icons';
@@ -19,8 +19,7 @@ const dummieData = [{
 { "__v": 0, "_id": "6470a8d07b8d2b6050f88de3", "_ownerId": "64592b510a1f118fa3f83c72", "category": "Fashion", "created": "2023-05-26T12:40:47.631Z", "emissions": 25, "title": "Got a pair of new jeans", "type": "Jeans" }, { "__v": 0, "_id": "6470a9207b8d2b6050f88de5", "_ownerId": "64592b510a1f118fa3f83c72", "category": "Fashion", "created": "2023-05-26T12:42:07.699Z", "emissions": 12.5, "title": "Bought a new shirt at HM", "type": "Shirt" }, { "__v": 0, "_id": "6470a9827b8d2b6050f88de7", "_ownerId": "64592b510a1f118fa3f83c72", "category": "Food", "created": "2023-05-26T12:43:46.214Z", "emissions": 0.74, "title": "Ate tuna for lunch", "type": "Tuna" }];
 
 const Diary = () => {
-    // const [personalLogs, setPersonalLogs] = useContext({});
-    let personalLogs = [];
+    const [personalLogs, setPersonalLogs] = useState([]);
 
     let token = '';
     const getUserData = async () => {
@@ -36,33 +35,29 @@ const Diary = () => {
     };
     getUserData();
 
-    useEffect(() => {
+    const getLogsData = (token) => {
         axios.get(`http://192.168.1.100:3030/data/catalog?"userId"=${token}`)
             .then(function (response) {
-                personalLogs = response.data;
-                console.log(response.data);
+                setPersonalLogs(response.data.reverse());
             })
             .catch(function (error) {
                 console.log(error);
             })
+    }
 
-        //setPersonalLogs(result)
-
-    }, [token]);
+    useEffect(() => {
+        getLogsData(token)
+    }, [token,personalLogs]);
 
     return (
         <SafeAreaView>
             <View style={styles.titleContainer}>
                 <Text style={styles.titleText}>Your logged emissions</Text>
-                <TouchableOpacity style={styles.refreshIcon}>
-                <FontAwesome name="refresh" size={24} color="seagreen" />
-                </TouchableOpacity>
             </View>
             <FlatList
-                data={dummieData}
+                data={personalLogs}
                 keyExtractor={(item) => item._id}
                 renderItem={({ item }) => {
-                    console.log(item.title);
                     return (
                         <View style={styles.listContainer}>
                             <View style={styles.imageContainer}>
@@ -136,8 +131,4 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         margin: 20,
     },
-    refreshIcon: {
-        marginLeft: 60,
-        marginTop: 8,
-    }
 });
