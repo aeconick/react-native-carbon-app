@@ -7,7 +7,7 @@ import AccordionItem from '../components/AccordionItem';
 const Act = () => {
     return (
         <SafeAreaView>
-            <Text style={{ fontSize: 26, fontWeight: 'bold', margin: 12 }}>
+            <Text style={{ fontSize: 26, fontWeight: 'bold', margin: 12, color: 'seagreen' }}>
                 Sustainable Guide:
             </Text>
             <View style={styles.container}>
