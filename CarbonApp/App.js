@@ -26,7 +26,7 @@ const App = () => {
   };
 
   readData()
-    .then(() => console.log(isAuthenticated))
+    .then(() => console.log(userData))
     .catch((e) => console.log(e))
   //TODO: fix
   return (
