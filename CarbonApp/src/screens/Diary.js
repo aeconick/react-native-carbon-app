@@ -11,6 +11,7 @@ const Diary = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedLog, setSelectedLog] = useState({});
     const [token, setToken] = useState('');
+    const [userId, setUserId] = useState('');
 
     const getUserData = async () => {
         try {
@@ -18,6 +19,7 @@ const Diary = () => {
 
             let userData = JSON.parse(value);
             setToken(userData.accessToken);
+            setUserId(userData._id)
 
         } catch (e) {
             console.log('Failed to fetch the input from storage');
@@ -31,9 +33,9 @@ const Diary = () => {
         }
     };
 
-    const getLogsData = (token) => {
+    const getLogsData = (userId) => {
         console.log(token);
-        axios.get(`http://192.168.1.100:3030/data/catalog?"userId"=${token}`) //TODO:fix
+        axios.get(`http://192.168.1.100:3030/data/catalog?where=_ownerId%3D%22${userId}%22`)
             .then(function (response) {
                 setPersonalLogs(response.data.reverse());
             })
@@ -46,8 +48,8 @@ const Diary = () => {
     let y = 1;
     useEffect(() => {
         console.log('useEffect: ', i++);
-        getLogsData(token)
-    }, [token]);
+        getLogsData(userId)
+    }, [userId]);
 
     const openModalByItem = (item) => {
         setModalVisible(true);
@@ -60,7 +62,7 @@ const Diary = () => {
             .then(function (response) {
                 console.log('item deleted: ', response.data);
                 setModalVisible(false);
-                getLogsData(token);
+                getLogsData(userId);
             })
             .catch(function (error) {
                 console.log(error);
@@ -68,7 +70,7 @@ const Diary = () => {
     }
 
     const refresh = () => {
-        getLogsData(token);
+        getLogsData(userId);
     }
 
     return (
