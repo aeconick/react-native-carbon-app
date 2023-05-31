@@ -25,6 +25,12 @@ const Diary = () => {
     };
     getUserData();
 
+    const config = {
+        headers: {
+            'x-authorization': token
+        }
+    };
+
     const getLogsData = (token) => {
         console.log(token);
         axios.get(`http://192.168.1.100:3030/data/catalog?"userId"=${token}`) //TODO:fix
@@ -50,8 +56,15 @@ const Diary = () => {
     }
 
     const onItemDelete = (id) => {
-        setModalVisible(false);
-        console.log('deleted id: ', id);
+        axios.delete(`http://192.168.1.100:3030/data/catalog/${id}`, config) //TODO:fix
+            .then(function (response) {
+                console.log('item deleted: ', response.data);
+                setModalVisible(false);
+                getLogsData(token);
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
     }
 
     const refresh = () => {
