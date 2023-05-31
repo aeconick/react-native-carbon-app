@@ -19,7 +19,6 @@ const AddFinal = ({
   const [loading, setLoading] = React.useState(false);
 
   const item = route.params.selectedItem;
-  //console.log(item);
 
   const [range, setRange] = React.useState(item.info.min);
   const [emissions, setEmissions] = React.useState((item.info.min * item.info.emissions).toFixed(2));
@@ -41,43 +40,44 @@ const AddFinal = ({
   const add = () => {
     setLoading(true);
 
-    let token = '';
+
     const getUserData = async () => {
       try {
         const value = await AsyncStorage.getItem("userData");
-  
-        let userData = JSON.parse(value);
-        token = userData.accessToken;
-  
+
+        const userData = JSON.parse(value);
+
+        const config = {
+          headers: {
+            'x-authorization': userData.accessToken
+          }
+        };
+
+        let logForm = {
+          category: item.category,
+          type: item.info.type,
+          emissions,
+          title: inputs.name,
+          created: new Date(),
+        };
+
+        axios.post('http://192.168.1.100:3030/data/catalog', logForm, config)
+          .then(function (response) {
+            console.log(response.data);
+            setLoading(false);
+            navigation.navigate('Budget');
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+
       } catch (e) {
         console.log('Failed to fetch the input from storage');
       }
     };
+
     getUserData();
 
-    const config = {
-      headers: {
-        'x-authorization': token || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5lbGlfcGNAbWFpbC5iZyIsIl9pZCI6IjY0NTkyYjUxMGExZjExOGZhM2Y4M2M3MiIsImlhdCI6MTY4NTQzODEwNH0.tDB2BUoZyC90A9UWTsM8Lq9F0o-Rv3C_5_Ap3y2N1OA', //TODO
-      }
-    };
-
-    let logForm = {
-      category: item.category,
-      type: item.info.type,
-      emissions,
-      title: inputs.name,
-      created: new Date(),
-    };
-
-    axios.post('http://192.168.1.100:3030/data/catalog', logForm, config)
-      .then(function (response) {
-        console.log(response.data);
-        setLoading(false);
-        navigation.navigate('Budget');
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
   };
 
   const handleOnchange = (text, input) => {
