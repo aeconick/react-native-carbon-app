@@ -42,7 +42,7 @@ const AccordionItem = ({ title, bodyText }) => {
                 <View style={styles.titleContainer}>
                     <Text style={styles.title}>{title}</Text>
                     <Animated.View style={{ transform: [{ rotateZ: arrowTransform }] }}>
-                        <MaterialIcons name={'keyboard-arrow-right'} size={30} />
+                        {showContent ? <MaterialIcons name={'keyboard-arrow-up'} size={30} /> : <MaterialIcons name={'keyboard-arrow-down'} size={30} />}
                     </Animated.View>
                 </View>
             </TouchableOpacity>
