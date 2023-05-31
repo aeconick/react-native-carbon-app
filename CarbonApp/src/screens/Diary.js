@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, SafeAreaView, FlatList, StyleSheet, TouchableOpacity, Modal } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -6,28 +6,18 @@ import { FontAwesome5, AntDesign, FontAwesome } from '@expo/vector-icons';
 
 import icons from '../constants/icons';
 
-const dummieData = [{
-    "__v": 0,
-    "_id": "6470a8a37b8d2b6050f88de1",
-    "_ownerId": "64592b510a1f118fa3f83c72",
-    "category": "Meal",
-    "created": "2023-05-26T12:40:03.181Z",
-    "emissions": 2.8,
-    "title": "Ate a low meat meal",
-    "type": "Low Meat"
-},
-{ "__v": 0, "_id": "6470a8d07b8d2b6050f88de3", "_ownerId": "64592b510a1f118fa3f83c72", "category": "Fashion", "created": "2023-05-26T12:40:47.631Z", "emissions": 25, "title": "Got a pair of new jeans", "type": "Jeans" }, { "__v": 0, "_id": "6470a9207b8d2b6050f88de5", "_ownerId": "64592b510a1f118fa3f83c72", "category": "Fashion", "created": "2023-05-26T12:42:07.699Z", "emissions": 12.5, "title": "Bought a new shirt at HM", "type": "Shirt" }, { "__v": 0, "_id": "6470a9827b8d2b6050f88de7", "_ownerId": "64592b510a1f118fa3f83c72", "category": "Food", "created": "2023-05-26T12:43:46.214Z", "emissions": 0.74, "title": "Ate tuna for lunch", "type": "Tuna" }];
-
 const Diary = () => {
     const [personalLogs, setPersonalLogs] = useState([]);
+    const [modalVisible, setModalVisible] = useState(false);
+    const [selectedLog, setSelectedLog] = useState({});
+    const [token, setToken] = useState('');
 
-    let token = '';
     const getUserData = async () => {
         try {
             const value = await AsyncStorage.getItem("userData");
 
             let userData = JSON.parse(value);
-            token = userData.accessToken;
+            setToken(userData.accessToken);
 
         } catch (e) {
             console.log('Failed to fetch the input from storage');
@@ -36,7 +26,8 @@ const Diary = () => {
     getUserData();
 
     const getLogsData = (token) => {
-        axios.get(`http://192.168.1.100:3030/data/catalog?"userId"=${token}`)
+        console.log(token);
+        axios.get(`http://192.168.1.100:3030/data/catalog?"userId"=${token}`) //TODO:fix
             .then(function (response) {
                 setPersonalLogs(response.data.reverse());
             })
@@ -45,19 +36,79 @@ const Diary = () => {
             })
     }
 
+    let i = 1;
+    let y = 1;
     useEffect(() => {
+        console.log('useEffect: ', i++);
         getLogsData(token)
-    }, [token,personalLogs]);
+    }, [token]);
+
+    const openModalByItem = (item) => {
+        setModalVisible(true);
+        console.log('title: ', item);
+        setSelectedLog(item);
+    }
+
+    const onItemDelete = (id) => {
+        setModalVisible(false);
+        console.log('deleted id: ', id);
+    }
+
+    const refresh = () => {
+        getLogsData(token);
+    }
 
     return (
         <SafeAreaView>
+            <View style={styles.centeredView}>
+                <Modal
+                    animationType='fade'
+                    transparent={true}
+                    visible={modalVisible}
+                    onRequestClose={() => {
+                        setModalVisible(!modalVisible);
+                    }}>
+
+                    <View style={styles.centeredView}>
+                        <View style={styles.modalView}>
+                            <View style={styles.modalText}>
+                                <Text style={styles.modalMainText}>Name</Text>
+                                <Text style={styles.modalSubText}>{selectedLog.title}</Text>
+                                <Text style={styles.modalMainText}>Type</Text>
+                                <Text style={styles.modalSubText}>{selectedLog.category} - {selectedLog.type}</Text>
+                                <Text style={styles.modalMainText}>Emissions</Text>
+                                <Text style={styles.modalSubText}>{selectedLog.emissions} kgCO2eq</Text>
+                                <Text style={styles.modalMainText}>Date</Text>
+                                <Text style={styles.modalSubText}>{selectedLog.created?.split('T')[0].split('-').reverse().join('.')}</Text>
+                            </View>
+                            <View style={styles.modalButtons}>
+                                <TouchableOpacity
+                                    style={[styles.button, styles.buttonClose]}
+                                    onPress={() => onItemDelete(selectedLog._id)}>
+                                    <Text style={styles.textStyle}>   Delete   </Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity
+                                    style={[styles.button, styles.buttonClose]}
+                                    onPress={() => setModalVisible(!modalVisible)}>
+                                    <Text style={styles.textStyle}>   Cancel   </Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    </View>
+                </Modal>
+            </View>
+
             <View style={styles.titleContainer}>
                 <Text style={styles.titleText}>Your logged emissions</Text>
+                <TouchableOpacity style={styles.refresh} onPress={() => refresh()}>
+                    <FontAwesome name="refresh" size={24} color="seagreen" />
+                </TouchableOpacity>
             </View>
             <FlatList
                 data={personalLogs}
                 keyExtractor={(item) => item._id}
                 renderItem={({ item }) => {
+                    console.log('flatlist: ', y++);
                     return (
                         <View style={styles.listContainer}>
                             <View style={styles.imageContainer}>
@@ -67,7 +118,7 @@ const Diary = () => {
                                 <Text style={styles.listTitle}>{item.title}</Text>
                                 <Text>{item.emissions} kgCO2eq</Text>
                             </View>
-                            <TouchableOpacity style={styles.infoContainer} onPress={() => console.log('hello')}>
+                            <TouchableOpacity style={styles.infoContainer} onPress={() => openModalByItem(item)}>
                                 <AntDesign name="infocirlceo" size={24} color="black" />
                             </TouchableOpacity>
                         </View>
@@ -81,6 +132,62 @@ const Diary = () => {
 export default Diary;
 
 const styles = StyleSheet.create({
+    centeredView: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 8,
+    },
+    modalView: {
+        margin: 20,
+        backgroundColor: 'white',
+        borderRadius: 20,
+        padding: 26,
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+    },
+    button: {
+        borderRadius: 20,
+        padding: 10,
+        elevation: 2,
+        marginLeft: 20,
+    },
+    buttonOpen: {
+        backgroundColor: '#F194FF',
+    },
+    buttonClose: {
+        backgroundColor: 'seagreen',
+    },
+    textStyle: {
+        color: 'white',
+        fontWeight: 'bold',
+        textAlign: 'center',
+        fontSize: 20,
+    },
+    modalText: {
+        marginBottom: 15,
+        textAlign: 'left',
+        marginBottom: 20,
+    },
+    modalMainText: {
+        fontSize: 26,
+        fontWeight: 'bold',
+
+    },
+    modalSubText: {
+        fontSize: 20,
+        color: 'grey',
+    },
+    modalButtons: {
+        flexDirection: 'row',
+    },
     listContainer: {
         flex: 1,
         padding: 2,
@@ -126,6 +233,11 @@ const styles = StyleSheet.create({
     titleText: {
         fontSize: 26,
         color: 'seagreen',
+        fontWeight: 'bold',
+    },
+    refresh: {
+        marginLeft: 58,
+        marginTop: 6,
     },
     titleContainer: {
         flexDirection: "row",
