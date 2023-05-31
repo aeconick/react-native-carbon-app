@@ -50,7 +50,7 @@ const AddFinal = ({
         token = userData.accessToken;
   
       } catch (e) {
-        alert('Failed to fetch the input from storage');
+        console.log('Failed to fetch the input from storage');
       }
     };
     getUserData();
