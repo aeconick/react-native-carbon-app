@@ -98,7 +98,7 @@ const Diary = () => {
                             </View>
                             <View style={styles.modalButtons}>
                                 <TouchableOpacity
-                                    style={[styles.button, styles.buttonClose]}
+                                    style={[styles.button, styles.buttonDelete]}
                                     onPress={() => onItemDelete(selectedLog._id)}>
                                     <Text style={styles.textStyle}>   Delete   </Text>
                                 </TouchableOpacity>
@@ -157,7 +157,8 @@ const styles = StyleSheet.create({
         margin: 20,
         backgroundColor: 'white',
         borderRadius: 20,
-        padding: 26,
+        padding: 20,
+        paddingLeft: 10,
         alignItems: 'center',
         shadowColor: '#000',
         shadowOffset: {
@@ -180,6 +181,9 @@ const styles = StyleSheet.create({
     buttonClose: {
         backgroundColor: 'seagreen',
     },
+    buttonDelete: {
+        backgroundColor: 'tomato',
+    },
     textStyle: {
         color: 'white',
         fontWeight: 'bold',
@@ -187,9 +191,8 @@ const styles = StyleSheet.create({
         fontSize: 20,
     },
     modalText: {
-        marginBottom: 15,
+        marginBottom: 50,
         textAlign: 'left',
-        marginBottom: 20,
     },
     modalMainText: {
         fontSize: 26,
@@ -209,13 +212,6 @@ const styles = StyleSheet.create({
         marginVertical: 4,
         marginHorizontal: 16,
         flexDirection: "row",
-        //justifyContent: "flex-start",
-        //alignItems: "center",
-        //borderWidth: 2,
-        //borderBottomColor: 'back',
-        //borderColor: "seagreen",
-        //borderRadius: 10,
-        //backgroundColor: "honeydew",
         borderBottomWidth: 2,
         borderColor: 'gainsboro',
         paddingBottom: 10,
