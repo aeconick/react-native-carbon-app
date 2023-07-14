@@ -1,4 +1,4 @@
-import { SafeAreaView, StyleSheet, Text, View, Image, FlatList, ScrollView } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, Image, ScrollView } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { Entypo } from '@expo/vector-icons';
 import axios from 'axios';
@@ -24,22 +24,16 @@ const Home = () => {
   }
 
   const getForecastData = () => {
-    // axios.get(`https://api.waqi.info/feed/here/?token=d3088553f04fdb829e101accb30e6a0a3f7b3a50`)
-    //   .then(function (response) {
-    //     setForecast(response.data.data);
-    //     let statusData = Number(response.data.data.aqi);
-    //     console.log("StatusData: ",statusData);
-    //     calculateStatus(statusData);
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   })
-
-    //TODO: Delete later and uncomment top
-    setForecast({ "aqi": 39, "attributions": [{ "logo": "Europe-EEA.png", "name": "Изпълнителната агенция по околна среда (ИАОС) - Bulgaria Executive Environment Agency (EEA)", "url": "http://www.eea.government.bg/" }, { "logo": "Europe-EEA.png", "name": "European Environment Agency", "url": "http://www.eea.europa.eu/themes/air/" }, { "name": "World Air Quality Index Project", "url": "https://waqi.info/" }], "city": { "geo": [42.142889, 24.765239], "location": "", "name": "Plovdiv - Kamenitsa, Bulgaria", "url": "https://aqicn.org/city/bulgaria/plovdiv-kamenitsa" }, "debug": { "sync": "2023-05-31T23:41:57+09:00" }, "dominentpol": "o3", "forecast": { "daily": { "o3": [Array], "pm10": [Array], "pm25": [Array] } }, "iaqi": { "dew": { "v": 12.5 }, "h": { "v": 42.5 }, "no2": { "v": 0.2 }, "o3": { "v": 38.5 }, "p": { "v": 1015 }, "pm10": { "v": 14 }, "t": { "v": 26 }, "w": { "v": 5.4 } }, "idx": 10564, "time": { "iso": "2023-05-31T15:00:00+03:00", "s": "2023-05-31 15:00:00", "tz": "+03:00", "v": 1685545200 } });
-    let statusData = Number(39);
-    console.log("StatusData: ", statusData);
-    calculateStatus(statusData);
+    axios.get(`https://api.waqi.info/feed/here/?token=d3088553f04fdb829e101accb30e6a0a3f7b3a50`)
+      .then(function (response) {
+        response.data.data.city.name = 'Plovdiv - Kamenitsa, Bulgaria';
+        setForecast(response.data.data);
+        let statusData = Number(response.data.data.aqi);
+        calculateStatus(statusData);
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
   }
 
   useEffect(() => {
@@ -53,44 +47,21 @@ const Home = () => {
         <View style={styles.container}>
           <Text style={styles.title}>Current Air Quality</Text>
           <View style={styles.locationContainer}>
-            <Text style={styles.location}>{forecast.city?.name || 'Plovdiv - Kamenitsa, Vulgaria'}</Text>
+            <Text style={styles.location}>{forecast.city?.name}</Text>
             <Entypo name="location-pin" size={20} color="black" />
           </View>
-
           <View style={styles.current}>
             <Image
               style={styles.largeIcon}
               source={require('../pictures/air.png')}
             />
-            <Text style={styles.currentIndex}>{forecast.aqi || '00'}</Text>
+            <Text style={styles.currentIndex}>{forecast.aqi}</Text>
           </View>
-
-          <Text style={styles.currentDescription}>Air Quality is {status || 'Doop'}!</Text>
-
+          <Text style={styles.currentDescription}>Air Quality is {status}!</Text>
           <Image
             style={styles.bigImage}
             source={require('../pictures/city.png')}
           />
-
-          {/* <FlatList
-            horizontal
-            data={dummieData}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={(item) => {
-              return (
-                <View style={styles.day}>
-                  <Text style={styles.dailyText}>15 May</Text>
-                  <Text style={styles.dailyText}>24</Text>
-                  <Image
-                    style={styles.smallImage}
-                    source={require('../pictures/small.png')}
-                  />
-                  <Text style={styles.dailyText}>Good</Text>
-                </View>
-              )
-            }}
-          /> */}
-
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -137,16 +108,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     marginBottom: 5,
   },
-  // subtitle: {
-  //   fontSize: 28,
-  //   marginVertical: 12,
-  //   marginLeft: 20,
-  //   color: 'teal',
-  //   fontWeight: 'bold',
-  // },
   bigImage: {
-    //width: '100%',
-    //height: 218,
     width: 400,
     height: 328,
   },
