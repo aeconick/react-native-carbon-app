@@ -12,24 +12,24 @@ const SubCategory = ({
     const onCategorySelect = () => {
         const finalItem = {
             category: item.category,
-            info: item.types.find(el=>el.type==title)
+            info: item.types.find(el => el.type == title)
         }
 
-        navigation.navigate('Main',{
+        navigation.navigate('AddFinal', {
             selectedItem: finalItem,
         });
     }
 
     return (
         <TouchableOpacity onPress={onCategorySelect}>
-        <View style={styles.container}>
-            <View>
-                <Text style={styles.title}>{title}</Text>
+            <View style={styles.container}>
+                <View>
+                    <Text style={styles.title}>{title}</Text>
+                </View>
+                <View>
+                    <MaterialIcons name="keyboard-arrow-right" size={30} color="seagreen" />
+                </View>
             </View>
-            <View>
-                <MaterialIcons name="keyboard-arrow-right" size={30} color="seagreen" />
-            </View>
-        </View>
         </TouchableOpacity>
     )
 };
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
         marginVertical: 8,
         marginHorizontal: 16,
         flexDirection: "row",
-        justifyContent: "space-around",
+        justifyContent: "space-between",
         alignItems: "center",
         borderWidth: 2,
         borderColor: "seagreen",
