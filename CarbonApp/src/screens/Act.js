@@ -1,4 +1,4 @@
-import { StyleSheet, FlatList, View, SafeAreaView, Text, ScrollView } from 'react-native';
+import { StyleSheet, FlatList, View, SafeAreaView, Text } from 'react-native';
 import React from 'react';
 
 import tips from '../constants/tips';
