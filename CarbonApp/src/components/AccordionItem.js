@@ -74,7 +74,6 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 22,
         color: 'black',
-        //fontWeight: 'bold',
     },
     bodyContainer: {
         paddingHorizontal: '2%',
