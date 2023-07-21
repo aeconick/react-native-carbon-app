@@ -2,12 +2,6 @@ const categories = [
     {
         category: 'Meal',
         types: [
-            /* Unit: kgCO2eq (kilograms of carbon dioxide equivalent) per meal */
-
-            /* https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4372775/ */
-            /* Mean greenhouse gas emissions per 2,000 kcal */
-            /* https://globalnews.ca/news/3615212/this-is-what-your-breakfast-lunch-and-dinner-calories-actually-look-like/ */
-            /* Human eats around 600 calories per meal */
             {
                 type: 'High Meat',
                 emissions: (7.19 * 600) / 2000,
@@ -56,16 +50,11 @@ const categories = [
                 min: 1,
                 max: 10,
             },
-
         ]
     },
     {
         category: 'Transport',
         types: [
-            /* https://static.ducky.eco/calculator_documentation.pdf */
-
-            /* Unit: kgCO2eq/m (kilograms of carbon dioxide equivalent) per ?meter? */
-
             {
                 type: 'Train',
                 emissions: 0.042,
@@ -118,10 +107,6 @@ const categories = [
     }, {
         category: 'Streaming',
         types: [
-            /* TODO: Unit: bits/s, use getInternetUsageCarbonImpact to get kgCO₂eq */
-
-            /* MP3 song at 192 kbps (kilobytes per second) / 3.8 MB */
-
             {
                 type: 'Audio - Mp3',
                 emissions: 0.000526,
@@ -130,14 +115,6 @@ const categories = [
                 min: 15,
                 max: 600,
             },
-
-            /* 
-            Star Wars The Rise Of Skywalker - 2h22
-            HD / 720p : 1.21 GB
-            Full HD / 1080p : 7.02 GB
-            Ultra HD / 2160p : 35.73 Gb
-            */
-
             {
                 type: 'Video - Hd',
                 emissions: 0.000763,
@@ -167,8 +144,6 @@ const categories = [
     {
         category: 'Purchase',
         types: [
-            /* Unit: kgCO2eq (kilograms of carbon dioxide equivalent) per product / transaction */
-
             {
                 type: 'Smartphone',
                 emissions: 80,
@@ -254,12 +229,6 @@ const categories = [
     {
         category: 'Fashion',
         types: [
-            /* Unit: kgCO2eq per product */
-
-            /* Clothing
-            https://www.ademe.fr/sites/default/files/assets/documents/poids_carbone-biens-equipement-201809-rapport.pdf
-            */
-
             {
                 type: 'Coat',
                 emissions: (89 + 39 + 25) / 3,
@@ -321,10 +290,6 @@ const categories = [
     {
         category: 'Food',
         types: [
-            /* Unit: kgCO2eq */
-
-            /* http://www.greeneatz.com/foods-carbon-footprint.html */
-
             {
                 type: 'Red Meat',
                 emissions: (39.2 + 27.0) / 2000,
@@ -332,7 +297,7 @@ const categories = [
                 text: 'g',
                 min: 20,
                 max: 500,
-            }, // (lamb + beef) / 2
+            },
             {
                 type: 'White Meat',
                 emissions: (12.1 + 10.9 + 6.9) / 3000,
@@ -340,7 +305,7 @@ const categories = [
                 text: 'g',
                 min: 20,
                 max: 500,
-            }, // (pork + turkey + chicken) / 3
+            },
             {
                 type: 'Fish',
                 emissions: 0.0061,
@@ -485,9 +450,6 @@ const categories = [
                 min: 20,
                 max: 500,
             },
-
-            /* https://www.bilans-ges.ademe.fr/ */
-
             {
                 type: 'Coffee',
                 emissions: 0.00314,
@@ -509,10 +471,6 @@ const categories = [
     {
         category: 'Electricity',
         types: [
-            /* Unit: kgCO₂eq/J (kilograms of carbon dioxide equivalent) per Joule */
-
-            /* source : https://github.com/carbonalyser/Carbonalyser - kgCO₂eq/kWh */
-
             {
                 type: 'Europe',
                 emissions: 0.276,
@@ -520,7 +478,7 @@ const categories = [
                 text: 'kWh',
                 min: 1,
                 max: 1000,
-            }, // - 0.276 [kgCO₂eq/kWh]
+            },
             {
                 type: 'USA',
                 emissions: 0.493,
@@ -528,7 +486,7 @@ const categories = [
                 text: 'kWh',
                 min: 1,
                 max: 1000,
-            }, // - 0.493 [kgCO₂eq/kWh]
+            },
             {
                 type: 'China',
                 emissions: 0.681,
@@ -536,7 +494,7 @@ const categories = [
                 text: 'kWh',
                 min: 1,
                 max: 1000,
-            }, // - 0.681 [kgCO₂eq/kWh]
+            },
             {
                 type: 'World',
                 emissions: 0.519,
@@ -544,14 +502,12 @@ const categories = [
                 text: 'kWh',
                 min: 1,
                 max: 1000,
-            }, // - 0.519 [kgCO₂eq/kWh]   
+            },
         ]
     },
     {
         category: 'Custom',
         types: [
-            /* Unit: kgCO2eq (kilograms of carbon dioxide equivalent) */
-
             {
                 type: 'Custom',
                 emissions: 1,
