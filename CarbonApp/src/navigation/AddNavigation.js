@@ -18,11 +18,11 @@ const AddNavigator = () => {
             }}
             initialRouteName='Login'
         >
-            <Stack.Screen name="Add" component={Add} />
+            <Stack.Screen name="Add" component={Add}/>
             <Stack.Screen name="AddSub" component={AddSub} options={{
                 headerTitle: 'Add',
             }} />
-            <Stack.Screen name="Main" component={AddFinal} options={{
+            <Stack.Screen name="AddFinal" component={AddFinal} options={{
                 headerTitle: 'Add',
             }} />
         </Stack.Navigator>
