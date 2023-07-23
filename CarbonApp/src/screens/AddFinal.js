@@ -40,7 +40,6 @@ const AddFinal = ({
   const add = () => {
     setLoading(true);
 
-
     const getUserData = async () => {
       try {
         const value = await AsyncStorage.getItem("userData");
@@ -61,9 +60,8 @@ const AddFinal = ({
           created: new Date(),
         };
 
-        axios.post('http://192.168.1.100:3030/data/catalog', logForm, config)
+        axios.post('http://172.20.10.5:3030/data/catalog', logForm, config)
           .then(function (response) {
-            console.log(response.data);
             setLoading(false);
             navigation.navigate('Budget');
           })
@@ -77,7 +75,6 @@ const AddFinal = ({
     };
 
     getUserData();
-
   };
 
   const handleOnchange = (text, input) => {
