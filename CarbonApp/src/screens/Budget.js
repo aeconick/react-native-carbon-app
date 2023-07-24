@@ -2,11 +2,12 @@ import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity, Modal } from 'r
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome, AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
 import CircularProgress from 'react-native-circular-progress-indicator';
 
 import months from '../constants/months';
 import { ScrollView } from 'react-native-gesture-handler';
+import { log } from 'react-native-reanimated';
 
 const Budget = () => {
   const [monthlyLogs, setMonthlyLogs] = useState([]);
@@ -16,6 +17,7 @@ const Budget = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [token, setToken] = useState('');
   const [userId, setUserId] = useState('');
+  const [tips, setTips] = useState([]);
 
   const [monthlyBudget, setMonthlyBudget] = useState(167);
   const [monthlyMeal, setMonthlyMeal] = useState(0);
@@ -55,12 +57,32 @@ const Budget = () => {
 
   const getLogsData = (userId) => {
     console.log(token);
-    axios.get(`http://192.168.1.100:3030/data/catalog?where=_ownerId%3D%22${userId}%22`)
+    axios.get(`http://172.20.10.5:3030/data/catalog?where=_ownerId%3D%22${userId}%22`)
       .then(function (response) {
         setMonthlyLogs(response.data.filter(item => item.created.split('-')[1] == date.getMonth() + 1));
         setYearlyLogs(response.data.filter(item => item.created.split('-')[0] == date.getFullYear()));
 
-        //monthly
+        let tipsArr = [];
+
+        monthlyLogs.forEach(item => {
+          if (item.type === 'High Meat' || item.type === 'Medium Meat' || item.type === 'Low Meat') {
+            tipsArr.push('Looks like you\'ve eaten meat. Maybe try to switch it out with a veggie option.');
+          } else if (item.type == 'Car') {
+            tipsArr.push('Looks like you\'ve traveled by a car. Maybe try to use public transportation.');
+          } else if (item.category == 'Streaming') {
+            tipsArr.push('Looks like you\'ve streamed content. Maybe try to read a book or go for a walk.');
+          } else if (item.type == 'Smartphone' || item.type == 'Laptop' || item.type == 'Tablet' || item.type == 'Computer' || item.type == 'Television') {
+            tipsArr.push('Looks like you\'ve bought an electronic device. Maybe try to use it less if you can.');
+          } else if (item.type == 'Electric Car' || item.type == 'Fossil Fuel Car' || item.type == 'Hybrid Car') {
+            tipsArr.push('Looks like you\'ve bought a new car. Maybe try to drive it less if you can.');
+          } else if (item.category == 'Fashion') {
+            tipsArr.push('Looks like you\'ve bought new clothes. Maybe try to shop vintage if you can.');
+          }
+        });
+
+        setTips([...new Set(tipsArr)]);
+
+        //monthly emissions
         let emissions = 0;
 
         const monthlyCategory = {
@@ -88,7 +110,7 @@ const Budget = () => {
         setMonthlyElectricity(monthlyCategory.Electricity);
         setMonthlyCustom(monthlyCategory.Custom);
 
-        //yearly
+        //yearly emissions
         let yearlyEmissions = 0;
 
         const yearlyCategory = {
@@ -124,7 +146,8 @@ const Budget = () => {
   let i = 1;
   useEffect(() => {
     console.log('useEffect: ', i++);
-    getLogsData(userId)
+    getLogsData(userId);
+    getLogsData(userId);
   }, [userId]);
 
   const refresh = () => {
@@ -133,7 +156,7 @@ const Budget = () => {
 
   return (
     <SafeAreaView>
-      <ScrollView>
+      <ScrollView style={styles.bottomMargin}>
         <View style={styles.centeredView}>
           <Modal
             animationType='fade'
@@ -146,15 +169,11 @@ const Budget = () => {
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
                 <View style={styles.modalText}>
-                  <Text style={styles.modalMainText}>LQLQLQLQLQL</Text>
-                  <Text style={styles.modalSubText}>LQLQLQLQLQLQLQ</Text>
+                  <Text style={styles.modalMainText}>Why is the budget set to 167kg per month?</Text>
+                  <Text style={styles.modalSubText}>The Paris Agreement is an international treaty adopted in 2015 to combat climate change. It aims to limit global warming to well below 2 degrees Celsius and pursue efforts to keep it below 1.5 degrees Celsius.</Text>
+                  <Text style={styles.modalSubText}>If you wish to respect The Paris Agreement try to keep your monthly emissions below 167kg.</Text>
                 </View>
                 <View style={styles.modalButtons}>
-                  <TouchableOpacity
-                    style={[styles.button, styles.buttonClose]}
-                    onPress={() => setModalVisible(!modalVisible)}>
-                    <Text style={styles.textStyle}>   Cancel   </Text>
-                  </TouchableOpacity>
                   <TouchableOpacity
                     style={[styles.button, styles.buttonClose]}
                     onPress={() => setModalVisible(!modalVisible)}>
@@ -168,16 +187,20 @@ const Budget = () => {
 
         <View style={styles.titleContainer}>
           <Text style={styles.titleText}>Your current budget</Text>
+          <TouchableOpacity style={styles.infoIcon} onPress={() => setModalVisible(true)}>
+            <AntDesign name="infocirlceo" size={24} color="seagreen" />
+          </TouchableOpacity>
           <TouchableOpacity style={styles.refresh} onPress={() => refresh()}>
             <FontAwesome name="refresh" size={24} color="seagreen" />
           </TouchableOpacity>
         </View>
-        {console.log('monthlyBuder: ',monthlyBudget.toString())}
+        {console.log('monthlyBuder: ', monthlyBudget.toString())}
         <View style={styles.progressContainer}>
           <Text style={styles.progressTitle}>{months[date.getMonth()]}</Text>
+
           <CircularProgress
             radius={90}
-            value={monthlyEmissions*0.5988024}
+            value={monthlyEmissions * 0.5988024}
             valueSuffix={'%'}
             maxValue={100}
             progressValueStyle={{ fontSize: 28 }}
@@ -208,11 +231,24 @@ const Budget = () => {
 
         </View>
 
+        <View style={styles.tipsContainer}>
+          <MaterialCommunityIcons
+            name="lightbulb-on-outline"
+            size={34} color="seagreen" 
+            />
+
+            {tips.length != 0 &&
+            <Text style={styles.tipsText}>
+            {tips[Math.floor(Math.random() * tips.length)]}
+
+            </Text>}
+        </View>
+
         <View style={styles.progressContainer}>
           <Text style={styles.progressTitle}>{date.getFullYear()}</Text>
           <CircularProgress
             radius={90}
-            value={yearlyEmissions*0.0499002}
+            value={yearlyEmissions * 0.0499002}
             valueSuffix={'%'}
             maxValue={100}
             progressValueStyle={{ fontSize: 28 }}
@@ -304,7 +340,7 @@ const styles = StyleSheet.create({
     color: 'grey',
   },
   modalButtons: {
-    flexDirection: 'row',
+    marginRight: 20,
   },
   listContainer: {
     flex: 1,
@@ -312,13 +348,6 @@ const styles = StyleSheet.create({
     marginVertical: 4,
     marginHorizontal: 16,
     flexDirection: "row",
-    //justifyContent: "flex-start",
-    //alignItems: "center",
-    //borderWidth: 2,
-    //borderBottomColor: 'back',
-    //borderColor: "seagreen",
-    //borderRadius: 10,
-    //backgroundColor: "honeydew",
     borderBottomWidth: 2,
     borderColor: 'gainsboro',
     paddingBottom: 10,
@@ -392,5 +421,31 @@ const styles = StyleSheet.create({
   },
   totalBudgetContainer: {
     marginTop: 30,
+  },
+  infoIcon: {
+    marginLeft: 10,
+    marginTop: 7,
+  },
+  tipsContainer: {
+    alignItems: 'center',
+    borderWidth: 2,
+    borderColor: '#c6dfd2',
+    borderRadius: 12,
+    marginLeft: 18,
+    marginRight: 18,
+    marginTop: 10,
+    marginBottom: 10,
+    padding: 8,
+  },
+  tipsText: {
+    textAlign: 'center',
+    paddingTop: 5,
+    paddingBottom: 5,
+    paddingLeft: 14,
+    paddingRight: 14,
+    fontSize: 16,
+  },
+  bottomMargin: {
+    marginBottom: 10,
   }
 });
