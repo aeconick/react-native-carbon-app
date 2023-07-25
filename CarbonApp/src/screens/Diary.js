@@ -34,8 +34,7 @@ const Diary = () => {
     };
 
     const getLogsData = (userId) => {
-        console.log(token);
-        axios.get(`http://192.168.1.100:3030/data/catalog?where=_ownerId%3D%22${userId}%22`)
+        axios.get(`http://172.20.10.5:3030/data/catalog?where=_ownerId%3D%22${userId}%22`)
             .then(function (response) {
                 setPersonalLogs(response.data.reverse());
             })
@@ -44,23 +43,18 @@ const Diary = () => {
             })
     }
 
-    let i = 1;
-    let y = 1;
     useEffect(() => {
-        console.log('useEffect: ', i++);
         getLogsData(userId)
     }, [userId]);
 
     const openModalByItem = (item) => {
         setModalVisible(true);
-        console.log('title: ', item);
         setSelectedLog(item);
     }
 
     const onItemDelete = (id) => {
-        axios.delete(`http://192.168.1.100:3030/data/catalog/${id}`, config) //TODO:fix
+        axios.delete(`http://172.20.10.5:3030/data/catalog/${id}`, config)
             .then(function (response) {
-                console.log('item deleted: ', response.data);
                 setModalVisible(false);
                 getLogsData(userId);
             })
@@ -94,7 +88,9 @@ const Diary = () => {
                                 <Text style={styles.modalMainText}>Emissions</Text>
                                 <Text style={styles.modalSubText}>{selectedLog.emissions} kgCO2eq</Text>
                                 <Text style={styles.modalMainText}>Date</Text>
-                                <Text style={styles.modalSubText}>{selectedLog.created?.split('T')[0].split('-').reverse().join('.')}</Text>
+                                <Text style={styles.modalSubText}>{
+                                    selectedLog.created?.split('T')[0].split('-').reverse().join('.')
+                                }</Text>
                             </View>
                             <View style={styles.modalButtons}>
                                 <TouchableOpacity
@@ -113,17 +109,11 @@ const Diary = () => {
                 </Modal>
             </View>
 
-            <View style={styles.titleContainer}>
-                <Text style={styles.titleText}>Your logged emissions</Text>
-                <TouchableOpacity style={styles.refresh} onPress={() => refresh()}>
-                    <FontAwesome name="refresh" size={24} color="seagreen" />
-                </TouchableOpacity>
-            </View>
+
             <FlatList
                 data={personalLogs}
                 keyExtractor={(item) => item._id}
                 renderItem={({ item }) => {
-                    console.log('flatlist: ', y++);
                     return (
                         <View style={styles.listContainer}>
                             <View style={styles.imageContainer}>
@@ -139,6 +129,12 @@ const Diary = () => {
                         </View>
                     )
                 }}
+                ListHeaderComponent={<View style={styles.titleContainer}>
+                    <Text style={styles.titleText}>Your logged emissions</Text>
+                    <TouchableOpacity style={styles.refresh} onPress={() => refresh()}>
+                        <FontAwesome name="refresh" size={24} color="seagreen" />
+                    </TouchableOpacity>
+                </View>}
             />
         </SafeAreaView>
     );
