@@ -1,5 +1,5 @@
 import React from "react";
-import { SafeAreaView, StyleSheet, Text, FlatList, StatusBar, View } from "react-native";
+import { SafeAreaView, StyleSheet, Text, FlatList} from "react-native";
 
 import SubCategory from "../components/SubCategory";
 
