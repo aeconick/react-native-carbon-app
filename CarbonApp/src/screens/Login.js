@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, SafeAreaView, Keyboard, Alert, } from 'react-native';
+import { View, Text, SafeAreaView, Keyboard, Alert } from 'react-native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -11,11 +11,6 @@ const Login = ({ navigation }) => {
     const [inputs, setInputs] = React.useState({ email: '', password: '' });
     const [errors, setErrors] = React.useState({});
     const [loading, setLoading] = React.useState(false);
-
-    //TODO: delete this late and remove onPress event
-    const onStorageDelete = () => {
-        AsyncStorage.removeItem("userData")
-    }
 
     const validate = async () => {
         Keyboard.dismiss();
@@ -45,19 +40,14 @@ const Login = ({ navigation }) => {
     const login = () => {
         setLoading(true);
 
-        axios.post('http://192.168.1.100:3030/users/login', inputs)
+        axios.post('http://172.20.10.5:3030/users/login', inputs)
             .then(function (response) {
                 userData = response.data;
-
                 AsyncStorage.setItem('userData', JSON.stringify(userData))
-                    .then(() => console.log('async storage updated from login'))
-                    .catch((e) => console.log(e));
-
                 navigation.navigate('Main');
                 setLoading(false);
             })
             .catch(function (error) {
-                console.log(error);
                 setLoading(false);
                 Alert.alert('Error', 'Invalid Details');
             });
@@ -70,11 +60,12 @@ const Login = ({ navigation }) => {
     const handleError = (error, input) => {
         setErrors(prevState => ({ ...prevState, [input]: error }));
     };
+    
     return (
         <SafeAreaView style={{ backgroundColor: "white", flex: 1 }}>
             <Loader visible={loading} />
             <View style={{ paddingTop: 50, paddingHorizontal: 20 }}>
-                <Text onPress={onStorageDelete} style={{ color: "black", fontSize: 40, fontWeight: 'bold' }}>
+                <Text style={{ color: "black", fontSize: 40, fontWeight: 'bold' }}>
                     Log In
                 </Text>
                 <Text style={{ color: "grey", fontSize: 18, marginVertical: 10 }}>
