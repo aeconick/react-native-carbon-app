@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, SafeAreaView, Keyboard, ScrollView, Alert, AsyncStorage } from 'react-native';
+import { View, Text, SafeAreaView, Keyboard, ScrollView } from 'react-native';
 import axios from 'axios';
 
 import Button from '../components/Button';
@@ -41,16 +41,15 @@ const Register = ({ navigation }) => {
 
     const register = () => {
         setLoading(true);
-        axios.post('http://192.168.1.100:3030/users/register', inputs)
-          .then(function (response) {
-            console.log(response.data);
-            //     AsyncStorage.setItem('user', JSON.stringify(response.data));
-                 setLoading(false);
-                 navigation.navigate('Login');
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
+        axios.post('http://172.20.10.5:3030/users/register', inputs)
+            .then(function (response) {
+                console.log(response.data);
+                setLoading(false);
+                navigation.navigate('Login');
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     };
 
     const handleOnchange = (text, input) => {
