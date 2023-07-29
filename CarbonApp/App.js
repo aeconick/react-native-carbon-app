@@ -1,7 +1,6 @@
 import 'react-native-gesture-handler';
 import React, { useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import AuthNavigator from './src/navigation/AuthNavigator';
@@ -23,8 +22,6 @@ const App = () => {
   useEffect(() => {
     readData();
   }, []);
-
-  console.log(userData);
 
   return (
     <NavigationContainer>
