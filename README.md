@@ -25,3 +25,9 @@ Node.js, a server-side JavaScript runtime environment, powers the backend of the
 
 ## Conclusion
 The mobile app developed for this thesis aims to empower users to make informed choices and take actionable steps towards reducing their carbon emissions. By providing tracking, goal setting, personalized recommendations, and data visualization, the app encourages users to adopt sustainable practices and contribute to a greener future. Leveraging the MERN stack and its associated technologies, the app delivers a robust and scalable solution that combines the power of MongoDB, Express, React Native, and Node.js. Through this technological foundation, the app offers a seamless user experience, cross-platform compatibility, and efficient data management.
+
+## App Preview
+![App Screenshots](https://drive.google.com/uc?export=view&id=1n0oZ8L8RP9DfrGB89SnnDUW40sIqTJLE)
+![App Screenshots](https://drive.google.com/uc?export=view&id=1rtCz_hl9U5GDYqpzy9qj9Acf1uKm1Ysd)
+![App Screenshots](https://drive.google.com/uc?export=view&id=1-iYAdoBFk6Sm0xgDixIkf5VgkMuYWEbN)
+![App Screenshots](https://drive.google.com/uc?export=view&id=1dbbx7SyWhQ42fjUJx2v9U0RGVE_JYqGx)
