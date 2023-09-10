@@ -1,32 +1,29 @@
-import React from 'react';
-import { View, Text, TextInput, StyleSheet } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useState } from "react";
+import { View, Text, TextInput, StyleSheet } from "react-native";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 const Input = ({
   label,
   iconName,
   error,
   password,
-  onFocus = () => { },
+  onFocus = () => {},
   ...props
 }) => {
-  const [hidePassword, setHidePassword] = React.useState(password);
-  const [isFocused, setIsFocused] = React.useState(false);
+  const [hidePassword, setHidePassword] = useState(password);
+  const [isFocused, setIsFocused] = useState(false);
   return (
-    <View style={{ marginBottom: 20 }}>
-      <Text style={style.label}>{label}</Text>
+    <View style={styles.container}>
+      <Text style={styles.label}>{label}</Text>
       <View
         style={[
-          style.inputContainer,
+          styles.inputContainer,
           {
-            borderColor: error
-              ? "red"
-              : isFocused
-                ? "seagreen"
-                : "honeydew",
-            alignItems: 'center',
+            borderColor: error ? "red" : isFocused ? "seagreen" : "honeydew",
+            alignItems: "center",
           },
-        ]}>
+        ]}
+      >
         <Icon
           name={iconName}
           style={{ color: "seagreen", fontSize: 22, marginRight: 10 }}
@@ -39,27 +36,28 @@ const Input = ({
           }}
           onBlur={() => setIsFocused(false)}
           secureTextEntry={hidePassword}
-          style={{ color: "seagreen", flex: 1 }}
+          style={styles.textInput}
           {...props}
         />
         {password && (
           <Icon
             onPress={() => setHidePassword(!hidePassword)}
-            name={hidePassword ? 'eye-outline' : 'eye-off-outline'}
+            name={hidePassword ? "eye-outline" : "eye-off-outline"}
             style={{ color: "seagreen", fontSize: 22 }}
           />
         )}
       </View>
-      {error && (
-        <Text style={{ marginTop: 7, color: "red", fontSize: 12 }}>
-          {error}
-        </Text>
-      )}
+      {error && <Text style={styles.errorText}>{error}</Text>}
     </View>
   );
 };
 
-const style = StyleSheet.create({
+export default Input;
+
+const styles = StyleSheet.create({
+  container: {
+    marginBottom: 20,
+  },
   label: {
     marginVertical: 5,
     fontSize: 14,
@@ -68,10 +66,17 @@ const style = StyleSheet.create({
   inputContainer: {
     height: 55,
     backgroundColor: "honeydew",
-    flexDirection: 'row',
+    flexDirection: "row",
     paddingHorizontal: 15,
     borderWidth: 0.5,
   },
+  textInput: {
+    color: "seagreen",
+    flex: 1,
+  },
+  errorText: {
+    marginTop: 7,
+    color: "red",
+    fontSize: 12,
+  },
 });
-
-export default Input;
