@@ -40,7 +40,7 @@ const Login = ({ navigation }) => {
     const login = () => {
         setLoading(true);
 
-        axios.post('http://172.20.10.5:3030/users/login', inputs)
+        axios.post('http://192.168.1.102:3030/users/login', inputs)
             .then(function (response) {
                 userData = response.data;
                 AsyncStorage.setItem('userData', JSON.stringify(userData))

@@ -34,7 +34,7 @@ const Diary = () => {
     };
 
     const getLogsData = (userId) => {
-        axios.get(`http://172.20.10.5:3030/data/catalog?where=_ownerId%3D%22${userId}%22`)
+        axios.get(`http://192.168.1.102:3030/data/catalog?where=_ownerId%3D%22${userId}%22`)
             .then(function (response) {
                 setPersonalLogs(response.data.reverse());
             })
@@ -53,7 +53,7 @@ const Diary = () => {
     }
 
     const onItemDelete = (id) => {
-        axios.delete(`http://172.20.10.5:3030/data/catalog/${id}`, config)
+        axios.delete(`http://192.168.1.102:3030/data/catalog/${id}`, config)
             .then(function (response) {
                 setModalVisible(false);
                 getLogsData(userId);
