@@ -38,7 +38,6 @@ const Home = () => {
 
   useEffect(() => {
     getForecastData();
-    console.log(forecast);
   }, []);
 
   return (
@@ -53,14 +52,14 @@ const Home = () => {
           <View style={styles.current}>
             <Image
               style={styles.largeIcon}
-              source={require('../pictures/air.png')}
+              source={require('../../assets/air.png')}
             />
             <Text style={styles.currentIndex}>{forecast.aqi}</Text>
           </View>
           <Text style={styles.currentDescription}>Air Quality is {status}!</Text>
           <Image
             style={styles.bigImage}
-            source={require('../pictures/city.png')}
+            source={require('../../assets/city.png')}
           />
         </View>
       </ScrollView>
