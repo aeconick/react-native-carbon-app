@@ -57,7 +57,7 @@ const Budget = () => {
 
   const getLogsData = (userId) => {
     console.log(token);
-    axios.get(`http://192.168.1.102:3030/data/catalog?where=_ownerId%3D%22${userId}%22`)
+    axios.get(`http://192.168.1.101:3030/data/catalog?where=_ownerId%3D%22${userId}%22`)
       .then(function (response) {
         setMonthlyLogs(response.data.filter(item => item.created.split('-')[1] == date.getMonth() + 1));
         setYearlyLogs(response.data.filter(item => item.created.split('-')[0] == date.getFullYear()));

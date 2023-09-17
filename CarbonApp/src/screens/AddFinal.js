@@ -60,7 +60,7 @@ const AddFinal = ({
           created: new Date(),
         };
 
-        axios.post('http://192.168.1.102:3030/data/catalog', logForm, config)
+        axios.post('http://192.168.1.101:3030/data/catalog', logForm, config)
           .then(function (response) {
             setLoading(false);
             navigation.navigate('Budget');

@@ -1,16 +1,18 @@
-import React from 'react';
-import { View, Text, SafeAreaView, Keyboard, Alert } from 'react-native';
+import {useState, useContext} from 'react';
+import {View, Text, SafeAreaView, Keyboard, Alert} from 'react-native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Button from '../components/Button';
 import Input from '../components/Input';
 import Loader from '../components/Loader';
+import {AuthContext} from "../contexts/AuthContext";
 
-const Login = ({ navigation }) => {
-    const [inputs, setInputs] = React.useState({ email: '', password: '' });
-    const [errors, setErrors] = React.useState({});
-    const [loading, setLoading] = React.useState(false);
+const Login = ({navigation}) => {
+    const {loading, onLoginSubmit} = useContext(AuthContext);
+    const [inputs, setInputs] = useState({email: '', password: ''});
+    const [errors, setErrors] = useState({});
+
 
     const validate = async () => {
         Keyboard.dismiss();
@@ -38,40 +40,28 @@ const Login = ({ navigation }) => {
     };
 
     const login = () => {
-        setLoading(true);
-
-        axios.post('http://192.168.1.102:3030/users/login', inputs)
-            .then(function (response) {
-                userData = response.data;
-                AsyncStorage.setItem('userData', JSON.stringify(userData))
-                navigation.navigate('Main');
-                setLoading(false);
-            })
-            .catch(function (error) {
-                setLoading(false);
-                Alert.alert('Error', 'Invalid Details');
-            });
+        onLoginSubmit(inputs);
     };
 
     const handleOnchange = (text, input) => {
-        setInputs(prevState => ({ ...prevState, [input]: text }));
+        setInputs(prevState => ({...prevState, [input]: text}));
     };
 
     const handleError = (error, input) => {
-        setErrors(prevState => ({ ...prevState, [input]: error }));
+        setErrors(prevState => ({...prevState, [input]: error}));
     };
-    
+
     return (
-        <SafeAreaView style={{ backgroundColor: "white", flex: 1 }}>
-            <Loader visible={loading} />
-            <View style={{ paddingTop: 50, paddingHorizontal: 20 }}>
-                <Text style={{ color: "black", fontSize: 40, fontWeight: 'bold' }}>
+        <SafeAreaView style={{backgroundColor: "white", flex: 1}}>
+            <Loader visible={loading}/>
+            <View style={{paddingTop: 50, paddingHorizontal: 20}}>
+                <Text style={{color: "black", fontSize: 40, fontWeight: 'bold'}}>
                     Log In
                 </Text>
-                <Text style={{ color: "grey", fontSize: 18, marginVertical: 10 }}>
+                <Text style={{color: "grey", fontSize: 18, marginVertical: 10}}>
                     Enter Your Details to Login
                 </Text>
-                <View style={{ marginVertical: 20 }}>
+                <View style={{marginVertical: 20}}>
                     <Input
                         onChangeText={text => handleOnchange(text, 'email')}
                         onFocus={() => handleError(null, 'email')}
@@ -89,7 +79,7 @@ const Login = ({ navigation }) => {
                         error={errors.password}
                         password
                     />
-                    <Button title="Log In" onPress={validate} />
+                    <Button title="Log In" onPress={validate}/>
                     <Text
                         onPress={() => navigation.navigate('Register')}
                         style={{

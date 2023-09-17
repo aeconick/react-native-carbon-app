@@ -109,7 +109,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 28,
     fontWeight: "bold",
-    marginBottom: 74,
   },
   modalButtons: {
     flexDirection: "row",

@@ -41,7 +41,7 @@ const Register = ({ navigation }) => {
 
     const register = () => {
         setLoading(true);
-        axios.post('http://192.168.1.102:3030/users/register', inputs)
+        axios.post('http://192.168.1.101:3030/users/register', inputs)
             .then(function (response) {
                 console.log(response.data);
                 setLoading(false);
