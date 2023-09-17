@@ -1,4 +1,4 @@
-import { StyleSheet, FlatList, View, SafeAreaView, Text } from 'react-native';
+import {StyleSheet, FlatList, View, SafeAreaView, Text} from 'react-native';
 
 import tips from '../constants/tips';
 import AccordionItem from '../components/AccordionItem';
@@ -7,16 +7,16 @@ const Act = () => {
     return (
         <SafeAreaView>
             <View style={styles.container}>
-                <Text style={{ fontSize: 26, fontWeight: 'bold', margin: 12, color: 'seagreen' }}>
+                <Text style={{fontSize: 26, fontWeight: 'bold', margin: 12, color: 'seagreen'}}>
                     Sustainable Guide:
                 </Text>
                 <FlatList
                     horizontal={false}
                     data={tips}
                     keyExtractor={(item) => item.id.toString()}
-                    renderItem={({ item }) => (
-                        <AccordionItem title={item.title} bodyText={item.body} />
-                    )} />
+                    renderItem={({item}) => (
+                        <AccordionItem title={item.title} bodyText={item.body}/>
+                    )}/>
             </View>
         </SafeAreaView>
     );

@@ -1,5 +1,4 @@
-import React from "react";
-import { SafeAreaView, StyleSheet, Text, FlatList} from "react-native";
+import {SafeAreaView, StyleSheet, Text, FlatList} from "react-native";
 
 import SubCategory from "../components/SubCategory";
 
@@ -7,13 +6,13 @@ const AddSubEmission = ({route}) => {
     const types = route.params.selectedItem.types;
     const selectedItem = route.params.selectedItem;
 
-    const renderItem = ({ item }) =>
-    (
-        <SubCategory
-            title={item.type}
-            item={selectedItem}
-        />
-    );
+    const renderItem = ({item}) =>
+        (
+            <SubCategory
+                title={item.type}
+                item={selectedItem}
+            />
+        );
 
     return (
         <SafeAreaView>
@@ -29,10 +28,10 @@ const AddSubEmission = ({route}) => {
 
 const styles = StyleSheet.create({
     header: {
-       fontSize: 30,
-       marginTop: 20,
-       marginLeft: 16,
-       marginBottom: 20,
+        fontSize: 30,
+        marginTop: 20,
+        marginLeft: 16,
+        marginBottom: 20,
     },
 });
 

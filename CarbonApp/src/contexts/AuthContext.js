@@ -10,11 +10,12 @@ export const AuthProvider = ({children}) => {
     const [auth, setAuth] = useState({});
     const [loading, setLoading] = useState(false);
 
+    const baseUrl = 'http://192.168.1.101:3030';
     const navigation = useNavigation();
 
     const onLoginSubmit = (inputs) => {
         setLoading(true);
-        axios.post('http://192.168.1.101:3030/users/login', inputs)
+        axios.post(`${baseUrl}/users/login`, inputs)
             .then(function (response) {
                 let userData = response.data;
                 setAuth(userData);
@@ -30,7 +31,7 @@ export const AuthProvider = ({children}) => {
 
     const onRegisterSubmit = (inputs) => { //TODO: check email
         setLoading(true);
-        axios.post('http://192.168.1.101:3030/users/register', inputs)
+        axios.post(`${baseUrl}/users/register`, inputs)
             .then(function (response) {
                 setLoading(false);
                 navigation.navigate('Login');

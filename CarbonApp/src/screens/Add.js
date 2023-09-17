@@ -1,16 +1,16 @@
-import { SafeAreaView, StyleSheet, Text, FlatList } from "react-native";
+import {SafeAreaView, StyleSheet, Text, FlatList} from "react-native";
 
 import categories from '../constants/categories';
 import MainCategory from "../components/MainCategory";
 
 const Add = () => {
-    const renderItem = ({ item }) =>
-    (
-        <MainCategory
-            title={item.category}
-            item={item}
-        />
-    );
+    const renderItem = ({item}) =>
+        (
+            <MainCategory
+                title={item.category}
+                item={item}
+            />
+        );
 
     return (
         <SafeAreaView>

@@ -1,8 +1,6 @@
 import {View, Text, SafeAreaView, Keyboard, ScrollView} from 'react-native';
-import React, {useState, useContext} from 'react';
+import {useState, useContext} from 'react';
 import Slider from '@react-native-community/slider';
-import axios from 'axios';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Button from '../components/Button';
 import Loader from '../components/Loader';

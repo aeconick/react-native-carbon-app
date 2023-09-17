@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {NavigationContainer} from "@react-navigation/native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 

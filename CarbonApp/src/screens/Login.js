@@ -1,5 +1,5 @@
 import {useState, useContext} from 'react';
-import {View, Text, SafeAreaView, Keyboard, Alert} from 'react-native';
+import {View, Text, SafeAreaView, Keyboard} from 'react-native';
 
 import {AuthContext} from "../contexts/AuthContext";
 import Button from '../components/Button';

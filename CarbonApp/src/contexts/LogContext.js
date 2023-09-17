@@ -11,6 +11,7 @@ export const LogProvider = ({children}) => {
     const [personalLogs, setPersonalLogs] = useState([]);
     const [loading, setLoading] = useState(false);
 
+    const baseUrl = 'http://192.168.1.101:3030/data';
     const navigation = useNavigation();
 
     const config = {
@@ -20,7 +21,7 @@ export const LogProvider = ({children}) => {
     };
 
     useEffect(() => {
-        axios.get(`http://192.168.1.101:3030/data/catalog?where=_ownerId%3D%22${auth._id}%22`)
+        axios.get(`${baseUrl}/catalog?where=_ownerId%3D%22${auth._id}%22`)
             .then(function (response) {
                 setPersonalLogs(response.data);
             })
@@ -31,7 +32,7 @@ export const LogProvider = ({children}) => {
 
     const onCreateLogSubmit = async (logForm) => {
         setLoading(true);
-        axios.post('http://192.168.1.101:3030/data/catalog', logForm, config)
+        axios.post(`${baseUrl}/catalog`, logForm, config)
             .then(function (response) {
                 const addedLog = response.data;
                 setPersonalLogs(state => [...state, addedLog]);
@@ -44,7 +45,7 @@ export const LogProvider = ({children}) => {
     };
 
     const onDeleteSubmit = (id) => {
-        axios.delete(`http://192.168.1.101:3030/data/catalog/${id}`, config)
+        axios.delete(`${baseUrl}/catalog/${id}`, config)
             .then(function () {
                 setPersonalLogs(state => state.filter(log => log._id !== id));
             })

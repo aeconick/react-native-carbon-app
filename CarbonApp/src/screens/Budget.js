@@ -14,8 +14,8 @@ const Budget = () => {
 
 
         const date = new Date();
-        const monthlyLogs = personalLogs.filter(item => item.created.split('-')[1] == date.getMonth() + 1);
-        const yearlyLogs = personalLogs.filter(item => item.created.split('-')[0] == date.getFullYear());
+        const monthlyLogs = personalLogs.filter(item => Number(item.created.split('-')[1]) === date.getMonth() + 1);
+        const yearlyLogs = personalLogs.filter(item => Number(item.created.split('-')[0]) === date.getFullYear());
 
         let monthlyEmissions = 0;
         const monthlyCategory = {
@@ -53,24 +53,22 @@ const Budget = () => {
         monthlyLogs.forEach(item => {
             if (item.type === 'High Meat' || item.type === 'Medium Meat' || item.type === 'Low Meat') {
                 tipsArr.push('Looks like you\'ve eaten meat. Maybe try to switch it out with a veggie option.');
-            } else if (item.type == 'Car') {
+            } else if (item.type === 'Car') {
                 tipsArr.push('Looks like you\'ve traveled by a car. Maybe try to use public transportation.');
-            } else if (item.category == 'Streaming') {
+            } else if (item.category === 'Streaming') {
                 tipsArr.push('Looks like you\'ve streamed content. Maybe try to read a book or go for a walk.');
-            } else if (item.type == 'Smartphone' || item.type == 'Laptop' || item.type == 'Tablet' || item.type == 'Computer' || item.type == 'Television') {
+            } else if (item.type === 'Smartphone' || item.type === 'Laptop' || item.type === 'Tablet' || item.type === 'Computer' || item.type === 'Television') {
                 tipsArr.push('Looks like you\'ve bought an electronic device. Maybe try to use it less if you can.');
-            } else if (item.type == 'Electric Car' || item.type == 'Fossil Fuel Car' || item.type == 'Hybrid Car') {
+            } else if (item.type === 'Electric Car' || item.type === 'Fossil Fuel Car' || item.type === 'Hybrid Car') {
                 tipsArr.push('Looks like you\'ve bought a new car. Maybe try to drive it less if you can.');
-            } else if (item.category == 'Fashion') {
+            } else if (item.category === 'Fashion') {
                 tipsArr.push('Looks like you\'ve bought new clothes. Maybe try to shop vintage if you can.');
             }
         });
-        console.log('aideee', tipsArr);
 
         const getPercent = (parts, whole) => {
             return (parts / whole * 100).toFixed(0);
         }
-
 
         return (
             <SafeAreaView>
@@ -128,39 +126,39 @@ const Budget = () => {
                         />
 
                         <View style={styles.percentContainer}>
-                            {monthlyCategory.Meal != 0 &&
+                            {monthlyCategory.Meal !== 0 &&
                                 <Text style={styles.percentMain}><Text style={styles.percentTitle}>Meal: </Text><Text
                                     style={styles.percentSubtitle}>{monthlyCategory.Meal.toFixed(0)} kg
                                     - {getPercent(monthlyCategory.Meal, monthlyEmissions)} %</Text></Text>}
-                            {monthlyCategory.Transport != 0 &&
+                            {monthlyCategory.Transport !== 0 &&
                                 <Text style={styles.percentMain}><Text style={styles.percentTitle}>Transport: </Text><Text
                                     style={styles.percentSubtitle}>{monthlyCategory.Transport.toFixed(0)} kg
                                     - {getPercent(monthlyCategory.Transport, monthlyEmissions)} %</Text></Text>}
-                            {monthlyCategory.Streaming != 0 &&
+                            {monthlyCategory.Streaming !== 0 &&
                                 <Text style={styles.percentMain}><Text style={styles.percentTitle}>Streaming: </Text><Text
                                     style={styles.percentSubtitle}>{monthlyCategory.Streaming.toFixed(0)} kg
                                     - {getPercent(monthlyCategory.Streaming, monthlyEmissions)} %</Text></Text>}
-                            {monthlyCategory.Purchase != 0 &&
+                            {monthlyCategory.Purchase !== 0 &&
                                 <Text style={styles.percentMain}><Text style={styles.percentTitle}>Purchase: </Text><Text
                                     style={styles.percentSubtitle}>{monthlyCategory.Purchase.toFixed(0)} kg
                                     - {getPercent(monthlyCategory.Purchase, monthlyEmissions)} %</Text></Text>}
-                            {monthlyCategory.Fashion != 0 &&
+                            {monthlyCategory.Fashion !== 0 &&
                                 <Text style={styles.percentMain}><Text style={styles.percentTitle}>Fashion: </Text><Text
                                     style={styles.percentSubtitle}>{monthlyCategory.Fashion.toFixed(0)} kg
                                     - {getPercent(monthlyCategory.Fashion, monthlyEmissions)} %</Text></Text>}
-                            {monthlyCategory.Food != 0 &&
+                            {monthlyCategory.Food !== 0 &&
                                 <Text style={styles.percentMain}><Text style={styles.percentTitle}>Food: </Text><Text
                                     style={styles.percentSubtitle}>{monthlyCategory.Food.toFixed(0)} kg
                                     - {getPercent(monthlyCategory.Food, monthlyEmissions)} %</Text></Text>}
-                            {monthlyCategory.Electricity != 0 &&
+                            {monthlyCategory.Electricity !== 0 &&
                                 <Text style={styles.percentMain}><Text style={styles.percentTitle}>Electricity: </Text><Text
                                     style={styles.percentSubtitle}>{monthlyCategory.Electricity.toFixed(0)} kg
                                     - {getPercent(monthlyCategory.Electricity, monthlyEmissions)} %</Text></Text>}
-                            {monthlyCategory.Custom != 0 &&
+                            {monthlyCategory.Custom !== 0 &&
                                 <Text style={styles.percentMain}><Text style={styles.percentTitle}>Custom: </Text><Text
                                     style={styles.percentSubtitle}>{monthlyCategory.Custom.toFixed(0)} kg
                                     - {getPercent(monthlyCategory.Custom, monthlyEmissions)} %</Text></Text>}
-                            {monthlyEmissions != 0 &&
+                            {monthlyEmissions !== 0 &&
                                 <Text style={styles.percentMain}><Text style={styles.percentTitle}>Total: </Text><Text
                                     style={styles.percentSubtitle}>{monthlyEmissions.toFixed(0)} kg</Text></Text>}
                             <View style={styles.totalBudgetContainer}>
@@ -171,7 +169,7 @@ const Budget = () => {
                                     <TouchableOpacity onPress={() => setModalVisible(true)}>
                                         <AntDesign name="infocirlceo" size={14} color="grey"/>
                                     </TouchableOpacity>
-                                    </Text></Text>
+                                </Text></Text>
                             </View>
                         </View>
 
@@ -183,7 +181,7 @@ const Budget = () => {
                             size={34} color="seagreen"
                         />
 
-                        {tipsArr.length != 0 &&
+                        {tipsArr.length !== 0 &&
                             <Text style={styles.tipsText}>
                                 {tipsArr[Math.floor(Math.random() * tipsArr.length)]}
                             </Text>}
@@ -206,39 +204,39 @@ const Budget = () => {
                         />
 
                         <View style={styles.percentContainer}>
-                            {yearlyCategory.Meal != 0 &&
+                            {yearlyCategory.Meal !== 0 &&
                                 <Text style={styles.percentMain}><Text style={styles.percentTitle}>Meal: </Text><Text
                                     style={styles.percentSubtitle}>{yearlyCategory.Meal.toFixed(0)} kg
                                     - {getPercent(yearlyCategory.Meal, yearlyEmissions)} %</Text></Text>}
-                            {yearlyCategory.Transport != 0 &&
+                            {yearlyCategory.Transport !== 0 &&
                                 <Text style={styles.percentMain}><Text style={styles.percentTitle}>Transport: </Text><Text
                                     style={styles.percentSubtitle}>{yearlyCategory.Transport.toFixed(0)} kg
                                     - {getPercent(yearlyCategory.Transport, yearlyEmissions)} %</Text></Text>}
-                            {yearlyCategory.Streaming != 0 &&
+                            {yearlyCategory.Streaming !== 0 &&
                                 <Text style={styles.percentMain}><Text style={styles.percentTitle}>Streaming: </Text><Text
                                     style={styles.percentSubtitle}>{yearlyCategory.Streaming.toFixed(0)} kg
                                     - {getPercent(yearlyCategory.Streaming, yearlyEmissions)} %</Text></Text>}
-                            {yearlyCategory.Purchase != 0 &&
+                            {yearlyCategory.Purchase !== 0 &&
                                 <Text style={styles.percentMain}><Text style={styles.percentTitle}>Purchase: </Text><Text
                                     style={styles.percentSubtitle}>{yearlyCategory.Purchase.toFixed(0)} kg
                                     - {getPercent(yearlyCategory.Purchase, yearlyEmissions)} %</Text></Text>}
-                            {yearlyCategory.Fashion != 0 &&
+                            {yearlyCategory.Fashion !== 0 &&
                                 <Text style={styles.percentMain}><Text style={styles.percentTitle}>Fashion: </Text><Text
                                     style={styles.percentSubtitle}>{yearlyCategory.Fashion.toFixed(0)} kg
                                     - {getPercent(yearlyCategory.Fashion, yearlyEmissions)} %</Text></Text>}
-                            {yearlyCategory.Food != 0 &&
+                            {yearlyCategory.Food !== 0 &&
                                 <Text style={styles.percentMain}><Text style={styles.percentTitle}>Food: </Text><Text
                                     style={styles.percentSubtitle}>{yearlyCategory.Food.toFixed(0)} kg
                                     - {getPercent(yearlyCategory.Food, yearlyEmissions)} %</Text></Text>}
-                            {yearlyCategory.Electricity != 0 &&
+                            {yearlyCategory.Electricity !== 0 &&
                                 <Text style={styles.percentMain}><Text style={styles.percentTitle}>Electricity: </Text><Text
                                     style={styles.percentSubtitle}>{yearlyCategory.Electricity.toFixed(0)} kg
                                     - {getPercent(yearlyCategory.Electricity, yearlyEmissions)} %</Text></Text>}
-                            {yearlyCategory.Custom != 0 &&
+                            {yearlyCategory.Custom !== 0 &&
                                 <Text style={styles.percentMain}><Text style={styles.percentTitle}>Custom: </Text><Text
                                     style={styles.percentSubtitle}>{yearlyCategory.Custom.toFixed(0)} kg
                                     - {getPercent(yearlyCategory.Custom, yearlyEmissions)} %</Text></Text>}
-                            {yearlyEmissions != 0 &&
+                            {yearlyEmissions !== 0 &&
                                 <Text style={styles.percentMain}><Text style={styles.percentTitle}>Total: </Text><Text
                                     style={styles.percentSubtitle}>{yearlyEmissions.toFixed(0)} kg</Text></Text>}
                             <View style={styles.totalBudgetContainer}>

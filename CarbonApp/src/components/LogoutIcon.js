@@ -1,7 +1,6 @@
 import {StyleSheet, Text, View, Modal, TouchableOpacity} from "react-native";
 import {useContext, useState} from "react";
 import {MaterialIcons} from "@expo/vector-icons";
-import {useNavigation} from "@react-navigation/native";
 import Loader from './Loader';
 
 import {AuthContext} from "../contexts/AuthContext";
@@ -9,7 +8,6 @@ import {AuthContext} from "../contexts/AuthContext";
 const LogoutIcon = () => {
     const {loading, onLogoutSubmit} = useContext(AuthContext);
     const [modalVisible, setModalVisible] = useState(false);
-    const navigation = useNavigation();
 
     const onLogout = () => {
         onLogoutSubmit();

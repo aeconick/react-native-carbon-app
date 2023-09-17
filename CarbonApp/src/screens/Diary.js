@@ -1,6 +1,6 @@
 import {View, Text, SafeAreaView, FlatList, StyleSheet, TouchableOpacity, Modal} from 'react-native';
-import React, {useState, useEffect, useContext} from 'react';
-import {FontAwesome5, AntDesign, FontAwesome} from '@expo/vector-icons';
+import {useState, useContext} from 'react';
+import {FontAwesome5, AntDesign} from '@expo/vector-icons';
 
 import icons from '../constants/icons';
 import {LogContext} from "../contexts/LogContext";
@@ -9,8 +9,6 @@ const Diary = () => {
     const {personalLogs, onDeleteSubmit} = useContext(LogContext);
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedLog, setSelectedLog] = useState({});
-
-    console.log('logs baby', personalLogs);
 
     const openModalByItem = (item) => {
         setModalVisible(true);
