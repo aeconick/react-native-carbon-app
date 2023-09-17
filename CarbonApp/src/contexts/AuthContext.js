@@ -13,49 +13,32 @@ export const AuthProvider = ({children}) => {
     const navigation = useNavigation();
 
     const onLoginSubmit = (inputs) => {
-            axios.post('http://192.168.1.101:3030/users/login', inputs)
-                .then(function (response) {
-                    let userData = response.data;
-                    setAuth(userData);
-                    AsyncStorage.setItem('userData', JSON.stringify(userData))
-                    navigation.navigate("Main");
-                    setLoading(false);
-                })
-                .catch(function (error) {
-                    setLoading(false);
-                    Alert.alert('Error', 'Invalid Details');
-                });
+        setLoading(true);
+        axios.post('http://192.168.1.101:3030/users/login', inputs)
+            .then(function (response) {
+                let userData = response.data;
+                setAuth(userData);
+                AsyncStorage.setItem('userData', JSON.stringify(userData))
+                navigation.navigate("Main");
+                setLoading(false);
+            })
+            .catch(function (error) {
+                setLoading(false);
+                Alert.alert('Error', 'Invalid Details');
+            });
     };
 
-    const onRegisterSubmit = async (values) => { //TODO: check email
-        // const {confirmPassword, ...registerData} = values;
-        //
-        // if (!(/.+\@.+\..+/.test(registerData.email))) {
-        //     setError('Invalid email!');
-        //     return;
-        // }
-        //
-        // if (confirmPassword !== registerData.password) {
-        //     setError('Password does not match!');
-        //     return;
-        // }
-        //
-        // if (registerData.password.length <= 5) {
-        //     setError('Password is too short!');
-        //     return;
-        // }
-        //
-        // try {
-        //     const result = await authService.register(values);
-        //
-        //     setAuth(result);
-        //
-        //     setError('');
-        //
-        //     navigate('/catalog');
-        // } catch (error) {
-        //     setError(error.message);
-        // }
+    const onRegisterSubmit = (inputs) => { //TODO: check email
+        setLoading(true);
+        axios.post('http://192.168.1.101:3030/users/register', inputs)
+            .then(function (response) {
+                setLoading(false);
+                navigation.navigate('Login');
+            })
+            .catch(function (error) {
+                setLoading(false);
+                Alert.alert('Error', 'Request Failed');
+            });
     };
 
     const onLogout = async () => {

@@ -1,18 +1,18 @@
-import React from 'react';
-import { View, Text, SafeAreaView, Keyboard, ScrollView } from 'react-native';
-import axios from 'axios';
+import {useState, useContext} from 'react';
+import {View, Text, SafeAreaView, Keyboard, ScrollView} from 'react-native';
 
+import {AuthContext} from "../contexts/AuthContext";
 import Button from '../components/Button';
 import Loader from '../components/Loader';
 import Input from '../components/Input';
 
-const Register = ({ navigation }) => {
-    const [inputs, setInputs] = React.useState({
+const Register = ({navigation}) => {
+    const {loading, onRegisterSubmit} = useContext(AuthContext);
+    const [inputs, setInputs] = useState({
         email: '',
         password: '',
     });
-    const [errors, setErrors] = React.useState({});
-    const [loading, setLoading] = React.useState(false);
+    const [errors, setErrors] = useState({});
 
     const validate = () => {
         Keyboard.dismiss();
@@ -40,36 +40,27 @@ const Register = ({ navigation }) => {
     };
 
     const register = () => {
-        setLoading(true);
-        axios.post('http://192.168.1.101:3030/users/register', inputs)
-            .then(function (response) {
-                console.log(response.data);
-                setLoading(false);
-                navigation.navigate('Login');
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        onRegisterSubmit(inputs);
     };
 
     const handleOnchange = (text, input) => {
-        setInputs(prevState => ({ ...prevState, [input]: text }));
+        setInputs(prevState => ({...prevState, [input]: text}));
     };
     const handleError = (error, input) => {
-        setErrors(prevState => ({ ...prevState, [input]: error }));
+        setErrors(prevState => ({...prevState, [input]: error}));
     };
     return (
-        <SafeAreaView style={{ backgroundColor: "white", flex: 1 }}>
-            <Loader visible={loading} />
+        <SafeAreaView style={{backgroundColor: "white", flex: 1}}>
+            <Loader visible={loading}/>
             <ScrollView
-                contentContainerStyle={{ paddingTop: 50, paddingHorizontal: 20 }}>
-                <Text style={{ color: "black", fontSize: 40, fontWeight: 'bold' }}>
+                contentContainerStyle={{paddingTop: 50, paddingHorizontal: 20}}>
+                <Text style={{color: "black", fontSize: 40, fontWeight: 'bold'}}>
                     Register
                 </Text>
-                <Text style={{ color: "grey", fontSize: 18, marginVertical: 10 }}>
+                <Text style={{color: "grey", fontSize: 18, marginVertical: 10}}>
                     Enter Your Details to Register
                 </Text>
-                <View style={{ marginVertical: 20 }}>
+                <View style={{marginVertical: 20}}>
                     <Input
                         onChangeText={text => handleOnchange(text, 'email')}
                         onFocus={() => handleError(null, 'email')}
@@ -88,7 +79,7 @@ const Register = ({ navigation }) => {
                         error={errors.password}
                         password
                     />
-                    <Button title="Register" onPress={validate} />
+                    <Button title="Register" onPress={validate}/>
                     <Text
                         onPress={() => navigation.navigate('Login')}
                         style={{

@@ -1,12 +1,10 @@
 import {useState, useContext} from 'react';
 import {View, Text, SafeAreaView, Keyboard, Alert} from 'react-native';
-import axios from 'axios';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import {AuthContext} from "../contexts/AuthContext";
 import Button from '../components/Button';
 import Input from '../components/Input';
 import Loader from '../components/Loader';
-import {AuthContext} from "../contexts/AuthContext";
 
 const Login = ({navigation}) => {
     const {loading, onLoginSubmit} = useContext(AuthContext);
