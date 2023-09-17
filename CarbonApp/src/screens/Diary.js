@@ -1,51 +1,14 @@
-import { View, Text, SafeAreaView, FlatList, StyleSheet, TouchableOpacity, Modal } from 'react-native';
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { FontAwesome5, AntDesign, FontAwesome } from '@expo/vector-icons';
+import {View, Text, SafeAreaView, FlatList, StyleSheet, TouchableOpacity, Modal} from 'react-native';
+import React, {useState, useEffect, useContext} from 'react';
+import {FontAwesome5, AntDesign, FontAwesome} from '@expo/vector-icons';
 
 import icons from '../constants/icons';
+import {LogContext} from "../contexts/LogContext";
 
 const Diary = () => {
-    const [personalLogs, setPersonalLogs] = useState([]);
+    const {personalLogs, onDeleteSubmit} = useContext(LogContext);
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedLog, setSelectedLog] = useState({});
-    const [token, setToken] = useState('');
-    const [userId, setUserId] = useState('');
-
-    const getUserData = async () => {
-        try {
-            const value = await AsyncStorage.getItem("userData");
-
-            let userData = JSON.parse(value);
-            setToken(userData.accessToken);
-            setUserId(userData._id)
-
-        } catch (e) {
-            console.log('Failed to fetch the input from storage');
-        }
-    };
-    getUserData();
-
-    const config = {
-        headers: {
-            'x-authorization': token
-        }
-    };
-
-    const getLogsData = (userId) => {
-        axios.get(`http://192.168.1.101:3030/data/catalog?where=_ownerId%3D%22${userId}%22`)
-            .then(function (response) {
-                setPersonalLogs(response.data.reverse());
-            })
-            .catch(function (error) {
-                console.log(error);
-            })
-    }
-
-    useEffect(() => {
-        getLogsData(userId)
-    }, [userId]);
 
     const openModalByItem = (item) => {
         setModalVisible(true);
@@ -53,18 +16,13 @@ const Diary = () => {
     }
 
     const onItemDelete = (id) => {
-        axios.delete(`http://192.168.1.101:3030/data/catalog/${id}`, config)
-            .then(function (response) {
-                setModalVisible(false);
-                getLogsData(userId);
-            })
-            .catch(function (error) {
-                console.log(error);
-            })
+        onDeleteSubmit(id);
+
+        setModalVisible(false);
     }
 
     const refresh = () => {
-        getLogsData(userId);
+        console.log('refresh')
     }
 
     return (
@@ -96,12 +54,12 @@ const Diary = () => {
                                 <TouchableOpacity
                                     style={[styles.button, styles.buttonDelete]}
                                     onPress={() => onItemDelete(selectedLog._id)}>
-                                    <Text style={styles.textStyle}>   Delete   </Text>
+                                    <Text style={styles.textStyle}> Delete </Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity
                                     style={[styles.button, styles.buttonClose]}
                                     onPress={() => setModalVisible(!modalVisible)}>
-                                    <Text style={styles.textStyle}>   Cancel   </Text>
+                                    <Text style={styles.textStyle}> Cancel </Text>
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -113,18 +71,18 @@ const Diary = () => {
             <FlatList
                 data={personalLogs}
                 keyExtractor={(item) => item._id}
-                renderItem={({ item }) => {
+                renderItem={({item}) => {
                     return (
                         <View style={styles.listContainer}>
                             <View style={styles.imageContainer}>
-                                <FontAwesome5 name={icons[item.category]} size={20} color="seagreen" />
+                                <FontAwesome5 name={icons[item.category]} size={20} color="seagreen"/>
                             </View>
                             <View style={styles.textContainer}>
                                 <Text style={styles.listTitle}>{item.title}</Text>
                                 <Text>{item.emissions} kgCO2eq</Text>
                             </View>
                             <TouchableOpacity style={styles.infoContainer} onPress={() => openModalByItem(item)}>
-                                <AntDesign name="infocirlceo" size={24} color="black" />
+                                <AntDesign name="infocirlceo" size={24} color="black"/>
                             </TouchableOpacity>
                         </View>
                     )
@@ -132,7 +90,7 @@ const Diary = () => {
                 ListHeaderComponent={<View style={styles.titleContainer}>
                     <Text style={styles.titleText}>Your logged emissions</Text>
                     <TouchableOpacity style={styles.refresh} onPress={() => refresh()}>
-                        <FontAwesome name="refresh" size={24} color="seagreen" />
+                        <FontAwesome name="refresh" size={24} color="seagreen"/>
                     </TouchableOpacity>
                 </View>}
             />

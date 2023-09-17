@@ -62,7 +62,6 @@ export const AuthProvider = ({children}) => {
         onLogoutSubmit,
         loading,
         auth,
-        isAuthenticated: !!auth.accessToken, //truthy => true, falsy => false
     };
 
     return (

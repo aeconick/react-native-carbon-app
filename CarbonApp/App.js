@@ -7,6 +7,7 @@ import {AuthProvider} from "./src/contexts/AuthContext";
 
 import AuthNavigator from './src/navigation/AuthNavigator';
 import TabNavigator from './src/navigation/TabNavigator';
+import {LogProvider} from "./src/contexts/LogContext";
 
 const App = () => {
     const [userData, setUserData] = useState(null);
@@ -28,9 +29,11 @@ const App = () => {
     return (
         <NavigationContainer>
             <AuthProvider>
-                {userData?.email
-                    ? <TabNavigator/>
-                    : <AuthNavigator/>}
+                <LogProvider>
+                    {userData?.email
+                        ? <TabNavigator/>
+                        : <AuthNavigator/>}
+                </LogProvider>
             </AuthProvider>
         </NavigationContainer>
     );
