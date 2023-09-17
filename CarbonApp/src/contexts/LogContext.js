@@ -34,7 +34,6 @@ export const LogProvider = ({children}) => {
         axios.post('http://192.168.1.101:3030/data/catalog', logForm, config)
             .then(function (response) {
                 const addedLog = response.data;
-                console.log(addedLog);
                 setPersonalLogs(state => [...state, addedLog]);
                 setLoading(false);
                 navigation.navigate('Budget');

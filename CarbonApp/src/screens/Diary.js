@@ -10,6 +10,8 @@ const Diary = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedLog, setSelectedLog] = useState({});
 
+    console.log('logs baby', personalLogs);
+
     const openModalByItem = (item) => {
         setModalVisible(true);
         setSelectedLog(item);
@@ -19,10 +21,6 @@ const Diary = () => {
         onDeleteSubmit(id);
 
         setModalVisible(false);
-    }
-
-    const refresh = () => {
-        console.log('refresh')
     }
 
     return (
@@ -89,9 +87,6 @@ const Diary = () => {
                 }}
                 ListHeaderComponent={<View style={styles.titleContainer}>
                     <Text style={styles.titleText}>Your logged emissions</Text>
-                    <TouchableOpacity style={styles.refresh} onPress={() => refresh()}>
-                        <FontAwesome name="refresh" size={24} color="seagreen"/>
-                    </TouchableOpacity>
                 </View>}
             />
         </SafeAreaView>
