@@ -41,16 +41,25 @@ export const AuthProvider = ({children}) => {
             });
     };
 
-    const onLogout = async () => {
-        // await authService.logout();
-        //
-        // setAuth({});
+    const onLogoutSubmit = () => {
+        setLoading(true);
+        AsyncStorage.clear()
+            .then(() => {
+                setLoading(false);
+                navigation.navigate("Login");
+            })
+            .catch((error) => {
+                setLoading(false);
+                Alert.alert('Error', 'Logout Failed')
+            });
+
+        setAuth({});
     };
 
     const context = {
         onLoginSubmit,
         onRegisterSubmit,
-        onLogout,
+        onLogoutSubmit,
         loading,
         auth,
         isAuthenticated: !!auth.accessToken, //truthy => true, falsy => false

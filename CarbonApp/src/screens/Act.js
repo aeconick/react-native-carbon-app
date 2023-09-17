@@ -1,5 +1,4 @@
 import { StyleSheet, FlatList, View, SafeAreaView, Text } from 'react-native';
-import React from 'react';
 
 import tips from '../constants/tips';
 import AccordionItem from '../components/AccordionItem';

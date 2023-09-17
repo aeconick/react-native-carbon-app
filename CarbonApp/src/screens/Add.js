@@ -1,4 +1,3 @@
-import React from "react";
 import { SafeAreaView, StyleSheet, Text, FlatList } from "react-native";
 
 import categories from '../constants/categories';
