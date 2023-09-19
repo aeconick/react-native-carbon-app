@@ -42,7 +42,7 @@ export const AuthProvider = ({children}) => {
             });
     };
 
-    const onLogoutSubmit = () => {
+    const onLogoutSubmit = () => { //TODO: logout from server
         setLoading(true);
         AsyncStorage.clear()
             .then(() => {
